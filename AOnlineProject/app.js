@@ -5,32 +5,13 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-     var that=this;
-    // 登录
-    wx.login({
-      success: res1 => {
-        wx.getUserInfo({
-          
-        })
-        
-       
-       
-      }
-    })
-    wx.checkSession({
-         success: function(){
-            console.dir("app.js——>wx.checkSession->success");
-         },
-         fail: function(){
-            console.dir("app.js——>wx.checkSession->fail");
-         }
-    })
+    
+    
    
-    // 获取用户信息
+    // 获取用户信
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
-          console.dir("asdfasdfasdfsddcccccccc");
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {

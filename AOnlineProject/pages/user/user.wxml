@@ -1,0 +1,17 @@
+<!--index.wxml-->
+<view class="container">
+    <view class="no-login" >
+         <button  open-type="getUserInfo" bindgetuserinfo="getUserInfo">  
+         <view class='pic'><image src=''></image></view>
+         <text>点击进行授权登录</text>
+         </button>
+
+         <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"> </button>
+
+         
+    </view>
+ 
+</view> 
+
+
+
