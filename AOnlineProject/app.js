@@ -5,42 +5,36 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-   
+     var that=this;
     // 登录
     wx.login({
       success: res1 => {
         wx.getUserInfo({
-          success: res2=> {
-            this.globalData.userInfo = res2.userInfo;
-            wx.request({
-                url: "https://wnworld.com/api/xiaochengxu/login.php",
-                data: {
-                  code: res1.code,
-                  iv: res2.iv,
-                  encryptedData: res2.encryptedData  
-                }
-            })
-          }
+          
         })
+        
+       
        
       }
     })
-
-    //
     wx.checkSession({
-      success:function(){
-        console.dir("checkSession")
-      }
+         success: function(){
+            console.dir("app.js——>wx.checkSession->success");
+         },
+         fail: function(){
+            console.dir("app.js——>wx.checkSession->fail");
+         }
     })
+   
     // 获取用户信息
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
+          console.dir("asdfasdfasdfsddcccccccc");
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              
+              // 可以将 res 发送给后台解码出 unionId 
                 this.globalData.userInfo = res.userInfo;
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
