@@ -4,42 +4,30 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
-    loginText:null,
-    loginCode:null,
-    userInfo: {},
-   
+    userInfo: null,
     hasUserInfo: false,
+    code: null,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../member/member'
-    })
-  },
   onLoad: function () {
-   
-    var that=this;
-    
-    wx.checkSession({
-      success: function(){
-        that.setData({
-          loginText:"xxxsadfasdfasd",
-          loginCode:app.globalData.loginCode
-        })
 
-       
+  },
+  getUserInfo: function () {
+    wx.checkSession({
+      success: function () {
+
+      },
+      fail: function () {
+        wx.login({
+          success: res => {
+            this.setData({
+              code: res.code
+            })
+          }
+        })
       }
     })
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+
   }
 })
 

@@ -1,15 +1,6 @@
 <!--index.wxml-->
 <view class="container">
- <view>{{loginCode}}</view>
- <view>{{loginText}}</view>
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+  <view>内容内容内容11111</view>
+  <view>{{userInfo.nickName}}</view>
+  <view bindtap='bindViewTap' style='margin-top:25px;'>点击 导航到会员中心</view>
 </view>

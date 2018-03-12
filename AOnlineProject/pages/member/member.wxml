@@ -1,0 +1,12 @@
+<!--index.wxml-->
+<view class="container">
+    <view>这里是会员中心</view>
+    <view>{{code}}</view>
+    <view style='margin-top:20px;'>
+        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+        <block wx:else>
+            <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+            <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        </block>
+    </view> 
+</view>

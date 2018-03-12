@@ -32,7 +32,21 @@ $res = json_decode($res, true);
 $sessionKey = $res["session_key"];
 $openId = $res["openid"];
 $skey = randomFromDev(30);
+$svalue = $sessionKey . $openId;
 
-print_r($res["session_key"]);
+$mysqli = new mysqli("localhost", "root", "yyh", "tsession");
+if ($mysqli->connect_errno) {
+    printf("Connect failed: %s\n", $mysqli->connect_error);
+    exit();
+}
+$mysqli->query("set names 'utf8'");
 
+$sql = "insert into session_tbl(s_id,s_value) values('$skey','$svalue')";
+$result = $mysqli->query($sql);
+
+if (!!$result->num_rows) {
+    echo $skey;
+} else {
+    echo 0;
+}
 ?>
