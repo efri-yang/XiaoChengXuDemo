@@ -5,18 +5,23 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
+    var that=this;
     wx.login({
         success:res=>{
           this.globalData.loginCode=res.code
+         
           wx.request({
             url:this.globalData.server+"/getSession.php",
+            method: 'POST',
+            header: { 'content-type': 'application/x-www-form-urlencoded' },
+
             data:{
               code:res.code
             },
             success:function(res){
                 if(!!res){
-                  wx.setStorageSync('sessionId', res.sessionId)
+                  
+                  console.dir(res.data);
                 }
             }
           })

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 function randomFromDev($len) {
     $fp = @fopen('./dev/urandom', 'rb');
     $result = '';
@@ -15,5 +17,9 @@ function randomFromDev($len) {
 
     return substr($result, 0, $len);
 }
-echo randomFromDev(20);
+
+
+
+echo devurandom_rand(30)
+
 ?>
