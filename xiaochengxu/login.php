@@ -34,7 +34,9 @@ $openId = $res["openid"];
 $skey = randomFromDev(30);
 $svalue = $sessionKey . $openId;
 
-$mysqli = new mysqli("localhost", "root", "yyh", "tsession");
+// $mysqli = new mysqli("localhost", "root", "yyh", "tsession");
+//
+$mysqli = new mysqli("localhost", "bdm300375458", "mysql3862749", "bdm300375458_db");
 if ($mysqli->connect_errno) {
     printf("Connect failed: %s\n", $mysqli->connect_error);
     exit();
