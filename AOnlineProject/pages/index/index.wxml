@@ -1,10 +1,9 @@
 <!--index.wxml-->
 <view class="container">
+
+   <button   open-type="getUserInfo" bindgetuserinfo="getUserInfo" > 获取头像昵称 </button>
   <view class="userinfo">这个是首页</view>
-  <view class="userinfo">这个是首页</view>
-  <view class="userinfo">这个是首页</view>
-  <view class="userinfo">这个是首页</view>
-  <button bindtap="bindViewTap">去个人中心</button>
+  
    
 </view> 
 

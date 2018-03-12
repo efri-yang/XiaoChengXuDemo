@@ -4,17 +4,22 @@ const app = getApp()
 
 Page({
   data: {
-  
-  },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../user/user'
-    })
+   
   },
   onLoad: function () {
    
   },
+  getUserInfo: function (e) {
+    if (!!e.detail.userInfo){
+      console.dir(e.detail);
+      app.globalData.userInfo = e.detail.userInfo;
+    }
+    
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    })
+  }
   
 })
 

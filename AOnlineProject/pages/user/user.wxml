@@ -1,9 +1,10 @@
 <!--index.wxml-->
 <view class="container">
+    <view></view>
     <view class="no-login" >
-         <button bindtap='hlogin'>  
-         <view class='pic'><image src=''></image></view>
-         <text>点击进行授权登录</text>
+         <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">  
+          <view class='pic'><image src=''></image></view>
+          <text>点击进行授权登录</text>
          </button>
 
         
