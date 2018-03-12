@@ -6,6 +6,7 @@ Page({
   data: {
     motto: 'Hello World',
     loginText:null,
+    loginCode:null,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -45,11 +46,12 @@ Page({
     }
 
     var that=this;
-
+    
     wx.checkSession({
       success: function(){
         that.setData({
-          loginText:"xxxsadfasdfasd"
+          loginText:"xxxsadfasdfasd",
+          loginCode:app.globalData.loginCode
         })
       }
     })

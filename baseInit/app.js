@@ -6,10 +6,11 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
-    // 登录
+    // 登录 用微信登录的时候 这个时候其实已经是login 的状态了，调用这个方法无非是为了获取code
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+
       }
     })
     // 获取用户信息
