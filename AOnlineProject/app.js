@@ -9,7 +9,15 @@ App({
     // 登录
     wx.login({
       success: res => {
+        this.globalData.loginCode = res.code;
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        wx.getUserInfo({
+          success: res => {
+            this.globalData.userInfo=res.userInfo
+            this.globalData.iv = res.iv
+            this.globalData.encryptedData = res.encryptedData
+          }
+        })
       }
     })
     // 获取用户信息
@@ -34,6 +42,9 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    test: "xxxxx",
+    userInfo: null,
+    loginCode: null,
+    server: "https://wnworld.com/api/xiaochengxu"
   }
 })

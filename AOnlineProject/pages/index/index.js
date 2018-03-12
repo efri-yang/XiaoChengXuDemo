@@ -5,6 +5,7 @@ const app = getApp()
 Page({
   data: {
     motto: 'Hello World',
+    loginText:null,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -42,6 +43,16 @@ Page({
         }
       })
     }
+
+    var that=this;
+
+    wx.checkSession({
+      success: function(){
+        that.setData({
+          loginText:"xxxsadfasdfasd"
+        })
+      }
+    })
   },
   getUserInfo: function(e) {
     console.log(e)
