@@ -7,41 +7,7 @@ App({
     wx.setStorageSync('logs', logs)
     var that = this;
 
-    wx.login({
-      success: function (res) {
-        if (wx.getStorageSync("sessionid")){
-
-       
-        wx.showModal({
-          title: ' wx.checkSession',
-          content: wx.getStorageSync("sessionid"),
-          success: function (res) {
-            if (res.confirm) {
-              console.log('用户点击确定')
-            } else if (res.cancel) {
-              console.log('用户点击取消')
-            }
-          }
-        })
-        }
-        that.globalData.loginCode = res.code;
-        wx.request({
-          url: that.globalData.server + "/getSession.php",
-          method: 'POST',
-          header: { 'content-type': 'application/x-www-form-urlencoded' },
-          data: {
-            code: res.code
-          },
-          success: function (res) {
-            if (!!res.data) {
-              wx.setStorageSync("sessionid", res.data.sessionkey);
-              console.dir(res.data.sessionkey);
-            }
-          }
-        })
-      }
-    })
-  
+    
 
 
   },
