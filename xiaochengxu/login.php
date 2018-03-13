@@ -1,7 +1,5 @@
 <?php
 
-
-
 function randomFromDev($len) {
     $fp = @fopen('./dev/urandom', 'rb');
     $result = '';
@@ -39,28 +37,26 @@ $svalue = $sessionKey . $openId;
 $mysqli = new mysqli("bdm300375458.my3w.com", "bdm300375458", "mysql3862749", "bdm300375458_db");
 if ($mysqli->connect_errno) {
     printf("Connect failed: %s\n", $mysqli->connect_error);
-    echo json_encode(array("sessionkey"=>11110));
+    echo json_encode(array("sessionkey" => 11110));
     exit();
 
 }
 $mysqli->query("set names 'utf8'");
 
-$sql = "insert into session_tbl(s_id,s_value) values('".$skey."','".$svalue."')";
+$sql = "insert into session_tbl(s_id,s_value) values('" . $skey . "','" . $svalue . "')";
 $result = $mysqli->query($sql);
 
-
-$conn=mysql_connect("bdm300375458.my3w.com","bdm300375458","mysql3862749");
-mysql_select_db("bdm300375458_db",$conn);
+$conn = mysql_connect("bdm300375458.my3w.com", "bdm300375458", "mysql3862749");
+mysql_select_db("bdm300375458_db", $conn);
 mysql_query("set names 'utf8'");
-$sql = "insert into session_tbl(s_id,s_value) values('".$skey."','".$svalue."')";
-$result=mysql_query($sql,$conn);
+$sql = "insert into session_tbl(s_id,s_value) values('" . $skey . "','" . $svalue . "')";
+$result = mysql_query($sql, $conn);
 
 if (mysql_num_rows($result)) {
-  
-    echo json_encode(array("sessionkey"=>10));
+
+    echo json_encode(array("sessionkey" => 10));
 } else {
     echo 0;
 }
 
- 
 ?>

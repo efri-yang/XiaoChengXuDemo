@@ -6,29 +6,33 @@ Page({
   data: {
     userInfo: null,
     hasUserInfo: false,
+    checkSessionText:null,
     code: null,
+    sessionId: null,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   onLoad: function () {
+        this.setData({
+          code:app.globalData.loginCode,
+          checkSessionText: app.globalData.checkSessionText,
+          checkSession: app.globalData.checkSession
+        })
 
-  },
-  getUserInfo: function () {
-    wx.checkSession({
-      success: function () {
-
-      },
-      fail: function () {
-        wx.login({
-          success: res => {
-            this.setData({
-              code: res.code
-            })
+        wx.showModal({
+          title: ' wx.checkSession',
+          content: '这是一个模态弹窗',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
           }
         })
-      }
-    })
+
 
   }
+  
 })
 
 // Page({

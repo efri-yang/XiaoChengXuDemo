@@ -1,7 +1,9 @@
 <!--index.wxml-->
 <view class="container">
     <view>这里是会员中心</view>
+    <view>{{checkSessionText}}</view>
     <view>{{code}}</view>
+    <view>{{checkSession}}</view>
     <view style='margin-top:20px;'>
         <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
         <block wx:else>

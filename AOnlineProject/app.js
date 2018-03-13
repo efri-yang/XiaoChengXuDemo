@@ -5,32 +5,51 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    var that=this;
-    wx.login({
-        success:res=>{
-          this.globalData.loginCode=res.code
-         
-          wx.request({
-            url:this.globalData.server+"/getSession.php",
-            method: 'POST',
-            header: { 'content-type': 'application/x-www-form-urlencoded' },
+    var that = this;
 
-            data:{
-              code:res.code
-            },
-            success:function(res){
-                if(!!res){
-                  
-                  console.dir(res.data);
-                }
+    wx.login({
+      success: function (res) {
+        if (wx.getStorageSync("sessionid")){
+
+       
+        wx.showModal({
+          title: ' wx.checkSession',
+          content: wx.getStorageSync("sessionid"),
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            } else if (res.cancel) {
+              console.log('用户点击取消')
             }
-          })
+          }
+        })
         }
+        that.globalData.loginCode = res.code;
+        wx.request({
+          url: that.globalData.server + "/getSession.php",
+          method: 'POST',
+          header: { 'content-type': 'application/x-www-form-urlencoded' },
+          data: {
+            code: res.code
+          },
+          success: function (res) {
+            if (!!res.data) {
+              wx.setStorageSync("sessionid", res.data.sessionkey);
+              console.dir(res.data.sessionkey);
+            }
+          }
+        })
+      }
     })
-  },
   
+
+
+  },
+
   globalData: {
     test: "xxxxx",
+    checkSessionText: null,
+    checkSession: null,
     userInfo: null,
     loginCode: null,
     encryptedData: null,
@@ -40,6 +59,55 @@ App({
 })
 
 
+
+// if (!wx.getStorageInfoSync("sessionid")) {
+//   wx.login({
+//     success: function (res) {
+//       this.globalData.loginCode = res.code;
+//       wx.request({
+//         url: this.globalData.server + "/getSession.php",
+//         method: 'POST',
+//         header: { 'content-type': 'application/x-www-form-urlencoded' },
+//         data: {
+//           code: res.code
+//         },
+//         success: function (res) {
+//           if (!!res.data) {
+//             wx.setStorageSync("sessionid", res.data.sessionkey);
+//             console.dir(res.data.sessionkey);
+//           }
+//         }
+//       })
+//     }
+//   })
+// } else {
+//   wx.checkSession({
+//     success: function () {
+
+//     },
+//     fail: function (res) {
+//       wx.login({
+//         success: function (res) {
+//           that.globalData.loginCode = res.code;
+//           wx.request({
+//             url: that.globalData.server + "/getSession.php",
+//             method: 'POST',
+//             header: { 'content-type': 'application/x-www-form-urlencoded' },
+//             data: {
+//               code: res.code
+//             },
+//             success: function (res) {
+//               if (!!res.data) {
+//                 wx.setStorageSync("sessionid", res.data.sessionkey);
+//                 console.dir(res.data.sessionkey);
+//               }
+//             }
+//           })
+//         }
+//       })
+//     }
+//   })
+// }
 
 // // 登录
 // wx.login({
