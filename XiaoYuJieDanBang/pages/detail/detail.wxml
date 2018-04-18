@@ -1,9 +1,9 @@
-<view class="caption-top">新订单</view>
+<view class="caption-top" wx:if="{{step >1 ? false :true}}">新订单</view>
 <!--step-end  -->
 <view class='customer-info'>
   <view class='tit'>客户信息</view>
   <view class='phone'>{{customerInfo.phone}} {{customerInfo.username}}</view>
-  <view class="tip-1"></view>
+  <view class="tip-1" wx:if="{{step>=5 ? true :false}}" ></view>
 </view>
 
 <view class="order-info">
@@ -11,7 +11,7 @@
   <view class="txt-1">派单时间：{{orderInfo.time}}</view>
   <view class="txt-1">派单员：{{orderInfo.person}}</view>
 
-  <view class="order-steps step-{{step}}">
+  <view class="order-steps step-{{step}}" wx:if="{{step > 1 ? true :false}}">
     <view class='line-wrap'>
         <view class='line'></view>
         <view class='line-on'></view>
@@ -78,7 +78,7 @@
 <view class='fixed-bottom-seat'></view>
 <view class='fixed-bottom'>
   <view class='phone' bindtap='makeCallPhone'><text class='iconfont icon-76 icon-txt'></text>拨打电话</view>
-  <view class='hand-txt'>
+  <view class='hand-txt {{step>=5 ? "disabled" :""}}' bindtap='setStepHandler'>
     <text class='txt-1'>订单操作</text>
     <text class='txt-2'>量房时间：04-10 15:30</text>
   </view>

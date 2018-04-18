@@ -31,7 +31,7 @@
   top: 15rpx;
   background: url("https://wnworld.com/images/jiedanbang/fish_txt.png") no-repeat top center;
   background-size: 100% 100%;
-  display: none;
+ 
 }
 
 .customer-info.step-end .phone {
@@ -55,6 +55,7 @@
 
 .order-steps {
   position: relative;
+  
 }
 
 .order-steps .line-wrap {
@@ -418,6 +419,9 @@
   color: #fff;
   width:60%; 
   text-align:center; 
+}
+.fixed-bottom .hand-txt.disabled{
+  background:#cccccc; 
 }
 
 .fixed-bottom .hand-txt .txt-1 {

@@ -7,6 +7,8 @@ Page({
    */
   data: {
       step:"",
+      
+      stepText: ['新订单', '已量房', '已设计', '已签约', '成功'],
       customerInfo:"",
       orderInfo:"",
       decorateInfo:""
@@ -27,7 +29,7 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success:function(res){
-        console.dir(res);
+       
         that.setData({
           step:res.data.step,
           customerInfo:res.data.customerInfo,
@@ -35,10 +37,47 @@ Page({
           decorateInfo: res.data.decorateInfo
         })
       }
-    })
+    });
+
+    
    
   },
+  setStepHandler:function(){
+    if(this.data.step >=5){
+      return;
+    }
+    var that=this;
+    wx.showActionSheet({
+      itemList: [this.data.stepText[this.data.step],'停止服务'],
+      success: function (res) {
+        if (res.tapIndex==0){
+           //点击的是步骤,发送数据请求(用户id 订单id)
+          wx.request({
+            url: app.globalData.server + "detail.php",
+            data: { 'uid': app.globalData.xyUserInfo['id'],},
+            method: 'post',
+            header: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            success: function (res) {
 
+            }
+          });
+          that.setData({
+            step:that.data.step+1
+          });
+
+          
+          
+        } else if (res.tapIndex == 1){
+           //点击的是停止服务
+        }
+      },
+      fail: function (res) {
+        console.log(res.errMsg)
+      }
+    })
+  },
   makeCallPhone:function(){
     var that=this;
     wx.makePhoneCall({
