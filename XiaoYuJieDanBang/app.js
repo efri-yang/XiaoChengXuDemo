@@ -1,8 +1,6 @@
 //app.js
 App({
-  onShow:function(){
-    this.getXyUserInfo();
-  },
+  
   //获取小鱼家装用户信息
   getXyUserInfo:function(callback){
     console.log("getXyUserInfo");
@@ -16,7 +14,9 @@ App({
       },
       fail:function(){
         //如果没有本地存储，那么就要获取去登录了
-        !!callback && callback.call(that); 
+        wx.navigateTo({
+          url: 'pages/login/login'
+        })
       }
     })
     

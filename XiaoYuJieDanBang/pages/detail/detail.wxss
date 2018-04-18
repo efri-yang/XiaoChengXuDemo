@@ -97,10 +97,27 @@
   width: 100%;
 }
 
-.order-steps.step-1  .item-cell .txt, .order-steps.step-2  .item-cell .txt,
-.order-steps.step-3  .item-cell .txt, .order-steps.step-4  .item-cell .txt,
-.order-steps.step-5  .item-cell .txt {
-  color: #14c67d !important;
+.order-steps.step-1 .step-list .item-cell-1 .txt, 
+
+.order-steps.step-2 .step-list .item-cell-1 .txt, 
+.order-steps.step-2 .step-list .item-cell-2 .txt,
+
+.order-steps.step-3 .step-list .item-cell-1 .txt, 
+.order-steps.step-3 .step-list .item-cell-2 .txt, 
+.order-steps.step-3 .step-list .item-cell-3 .txt, 
+
+.order-steps.step-4 .step-list .item-cell-1 .txt,
+.order-steps.step-4 .step-list .item-cell-2 .txt,
+.order-steps.step-4 .step-list .item-cell-3 .txt,
+.order-steps.step-4 .step-list .item-cell-4 .txt,
+
+
+.order-steps.step-5 .step-list .item-cell-1 .txt,
+.order-steps.step-5 .step-list .item-cell-2 .txt,
+.order-steps.step-5 .step-list .item-cell-3 .txt,
+.order-steps.step-5 .step-list .item-cell-4 .txt,
+.order-steps.step-5 .step-list .item-cell-5 .txt {
+  color: #14c67d;
 }
 
 .order-steps.step-1 .item-cell-1 .circle .circle-1 {

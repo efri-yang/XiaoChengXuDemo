@@ -18,21 +18,22 @@
   <view class='list-item clearfix'>
     <view class='item-cell item-1'>
       <view class='item-detail'>
-        <view class="num">8669
-          <view class='circle'></view>
+        <view class="num">{{orderCount.xdd}}
+          <!-- 订单为零的时候不显示小圆圈 -->
+          <view class='circle' wx:if="{{orderCount.xdd==0 ? false :true}}"></view>
         </view>
         <text class='txt'>新订单</text>
       </view>
     </view>
     <view class='item-cell item-2'>
       <view class='item-detail'>
-        <view class="num">1926 </view>
+        <view class="num">{{orderCount.ylf}} </view>
         <text class='txt'>已量房</text>
       </view>
     </view>
     <view class='item-cell item-3'>
       <view class='item-detail'>
-        <view class="num">1542
+        <view class="num">{{orderCount.ysj}}
 
         </view>
         <text class='txt'>已设计</text>
@@ -41,7 +42,7 @@
     <view class='item-cell item-4'>
       <view class='item-detail'>
         <text class='txt'>已签约</text>
-        <view class="num">8669
+        <view class="num">{{orderCount.yqy}}
 
         </view>
       </view>
@@ -49,7 +50,7 @@
     <view class='item-cell item-5'>
       <view class='item-detail'>
         <text class='txt'>已失效</text>
-        <view class="num">1926
+        <view class="num">{{orderCount.ysx}}
 
         </view>
       </view>
@@ -58,7 +59,33 @@
   </view>
 </view>
 
+
 <view class='new-order-list'>
+  <view class='soma-hd'>
+    <text class='iconfont icon-gonggao'></text>新订单-请及时处理
+  </view>
+  <view class='soma-list'>
+    <view wx:for="{{orderNew}}" wx:key="idx" wx:for-item="item" class='item-cell'>
+      <navigator url="/pages/detail/detail?id={{item.id}}" hover-class="navigator-hover">
+        <view class='time'>
+          <view class='tag'>
+            <text class='txt-1'>时间</text>{{item.time}}</view>
+        </view>
+        <view class="person-info">{{item.username}}（{{item.phone}}）</view>
+        <view class='address'>{{item.address}} ></view>
+      </navigator>
+    </view>
+
+
+
+
+  </view>
+</view>
+
+
+
+
+<!-- <view class='new-order-list'>
   <view class='soma-hd'><text class='iconfont icon-gonggao'></text>新订单-请及时处理</view>
   <view class='soma-list'>
       <view class='item-cell'>
@@ -91,11 +118,11 @@
           <view class='address'>首开领翔上郡 ></view>
       </view>
   </view>
-</view>
+</view> -->
 
 
-<view class='contact-phone clearfix'>
-    <view class='iconfont icon-76 icon-txt'></view>
-    <text class='txt-1'>联系客服</text>
-    <view class='phone'>0592-6799988 ></view>
+<view class='contact-phone clearfix' bindtap='makeCallPhone'>
+  <view class='iconfont icon-76 icon-txt'></view>
+  <text class='txt-1'>联系客服</text>
+  <view class='phone'>0592-6799988 ></view>
 </view>
