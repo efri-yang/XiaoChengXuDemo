@@ -4,111 +4,100 @@ const app = getApp()
 
 Page({
   data: {
- 
+    // text:"这是一个页面"
+    storageContent: '',
+    storageSyncContent: ''
   },
-  onReady: function (e) {
-    // 使用 wx.createMapContext 获取 map 上下文
-    this.mapCtx = wx.createMapContext('myMap')
+  onLoad: function (options) {
+    // 页面初始化 options为页面跳转所带来的参数
   },
-  getCenterLocation: function () {
-    this.mapCtx.getCenterLocation({
+  /**
+   * 异步存储
+   */
+  listenerStorageSave: function () {
+    //以键值对的形式存储 传进去的是个对象
+    wx.setStorage({
+      key: 'key',
+      data: '我是storeage异步存储的信息',
       success: function (res) {
-        console.log(res.longitude)
-        console.log(res.latitude)
+        console.log(res)
       }
     })
   },
-  moveToLocation: function () {
-    this.mapCtx.moveToLocation()
-  },
-  translateMarker: function () {
-    this.mapCtx.translateMarker({
-      markerId: 0,
-      autoRotate: true,
-      duration: 1000,
-      destination: {
-        latitude: 23.10229,
-        longitude: 113.3345211,
+  /**
+   * 异步取信息
+   */
+  listenerStorageGet: function () {
+    var that = this;
+    wx.getStorage({
+      //获取数据的key
+      key: 'key',
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          //
+          storageContent: res.data
+        })
       },
-      animationEnd() {
-        console.log('animation end')
+      /**
+       * 失败会调用
+       */
+      fail: function (res) {
+        console.log(res)
       }
     })
   },
-  includePoints: function () {
-    this.mapCtx.includePoints({
-      padding: [10],
-      points: [{
-        latitude: 23.10229,
-        longitude: 113.3345211,
-      }, {
-        latitude: 23.00229,
-        longitude: 113.3345211,
-      }]
+
+  /**
+   * 清除数据
+   */
+  listenerStorageClear: function () {
+    var that = this;
+    wx.clearStorage({
+      success: function (res) {
+        that.setData({
+          storageContent: ''
+        })
+      }
     })
+  },
+
+
+  /**
+   * 数据同步存储
+   */
+  listenerStorageSyncSave: function () {
+    wx.setStorageSync('key', '我是同步存储的数据')
+  },
+
+  /**
+   * 数据同步获取
+   */
+  listenerStorageSyncGet: function () {
+    // var that = this;
+    var value = wx.getStorageSync('key')
+    this.setData({
+      storageSyncContent: value
+    })
+  },
+
+  /**
+   * 清除同步存储数据
+   */
+  listenerStorageSyncClear: function () {
+    wx.clearStorageSync()
+  },
+
+  onReady: function () {
+    // 页面渲染完成
+  },
+  onShow: function () {
+    // 页面显示
+  },
+  onHide: function () {
+    // 页面隐藏
+  },
+  onUnload: function () {
+    // 页面关闭
   }
 })
-
-// Page({
-//   data: {
-//     motto: 'Hello World',
-//     loginText: null,
-//     loginCode: null,
-//     userInfo: {},
-//     hasUserInfo: false,
-//     canIUse: wx.canIUse('button.open-type.getUserInfo')
-//   },
-//   //事件处理函数
-//   bindViewTap: function () {
-//     wx.navigateTo({
-//       url: '../logs/logs'
-//     })
-//   },
-//   onLoad: function () {
-//     if (app.globalData.userInfo) {
-//       this.setData({
-//         userInfo: app.globalData.userInfo,
-//         hasUserInfo: true
-//       })
-//     } else if (this.data.canIUse) {
-//       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-//       // 所以此处加入 callback 以防止这种情况
-//       app.userInfoReadyCallback = res => {
-//         this.setData({
-//           userInfo: res.userInfo,
-//           hasUserInfo: true
-//         })
-//       }
-//     } else {
-//       // 在没有 open-type=getUserInfo 版本的兼容处理
-//       wx.getUserInfo({
-//         success: res => {
-//           app.globalData.userInfo = res.userInfo
-//           this.setData({
-//             userInfo: res.userInfo,
-//             hasUserInfo: true
-//           })
-//         }
-//       })
-//     }
-
-//     var that = this;
-
-//     wx.checkSession({
-//       success: function () {
-//         that.setData({
-//           loginText: "xxxsadfasdfasd",
-//           loginCode: app.globalData.loginCode
-//         })
-//       }
-//     })
-//   },
-//   getUserInfo: function (e) {
-//     console.log(e)
-//     app.globalData.userInfo = e.detail.userInfo
-//     this.setData({
-//       userInfo: e.detail.userInfo,
-//       hasUserInfo: true
-//     })
-//   }
-// })
