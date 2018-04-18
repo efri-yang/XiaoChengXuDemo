@@ -6,22 +6,6 @@ Page({
     submiting:false
   },
   onLoad: function () {
-    if (app.globalData.sessionJdbId){
-      wx.redirectTo({
-        url: '/pages/index/index'
-      })
-    }else{
-      wx.getStorage({
-        key: 'sessionJdbId',
-        success: function (res) {
-          wx.redirectTo({
-            url: '/pages/index/index'
-          })
-        }
-      })
-    }
-
-
     this._initValidate();
   },
   formSubmit: function (e) {
@@ -63,11 +47,11 @@ Page({
           }else{
              //动态全局赋值
             app.globalData.xyUserInfo=res.data.XyUserInfo;
-            app.globalData.sessionJdbId = res.data.XyUserInfo["id"];
             //本地存储id
+          
             wx.setStorage({
-              key: "sessionJdbId",
-              data: res.data.XyUserInfo["id"]
+              key: "sessionJdbUserInfo",
+              data: res.data.XyUserInfo
             });
 
             //跳转到相关页面

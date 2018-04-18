@@ -4,17 +4,14 @@ const app = getApp();
 
 Page({
   data: {
-    test: app.globalData.test
+    test:"cccc"
   },
   onLoad: function () {
-    if (!app.globalData.xyUserInfo) {
-      
-
-      
-    }
-    console.dir(app.globalData.xyUserInfo);
-    this.setData({
-      xyUserInfo: app.globalData.xyUserInfo
+    var that=this;
+    app.getXyUserInfo(function(){
+      that.setData({
+        test:"cccccccc"
+      })
     })
   }
 
