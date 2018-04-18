@@ -1,0 +1,10 @@
+
+
+<view class="cost-container">
+  <view class='tip-1'>为了更加精准为您派单，请填写工程造价</view>
+  <view class='form-item'>
+      <text class='lab'>¥</text>
+      <input type='number' class='ipt-text' placeholder='0.0'/>
+  </view>
+  <view class="ipt-submit"><button formType="submit" type="primary">登录</button></view>
+</view>

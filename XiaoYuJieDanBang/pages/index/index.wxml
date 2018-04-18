@@ -1,0 +1,101 @@
+<!--index.wxml-->
+{{test}}
+<view class='header-top'>
+  <view class='avatar-box clearfix'>
+    <view class='pic'>
+      <image src='{{xyUserInfo["avatar"]}}' mode="{{aspectFit}}"></image>
+    </view>
+    <view class="txt">{{xyUserInfo["nickname"]}}</view>
+    <view class='level-tag'>
+      <view class='icon-level'>
+        <text class='iconfont icon-jinpai '></text>
+      </view>
+      <view class="tag-name">
+        <text>金牌商家</text>
+      </view>
+    </view>
+  </view>
+  <view class='list-item clearfix'>
+    <view class='item-cell item-1'>
+      <view class='item-detail'>
+        <view class="num">8669
+          <view class='circle'></view>
+        </view>
+        <text class='txt'>新订单</text>
+      </view>
+    </view>
+    <view class='item-cell item-2'>
+      <view class='item-detail'>
+        <view class="num">1926 </view>
+        <text class='txt'>已量房</text>
+      </view>
+    </view>
+    <view class='item-cell item-3'>
+      <view class='item-detail'>
+        <view class="num">1542
+
+        </view>
+        <text class='txt'>已设计</text>
+      </view>
+    </view>
+    <view class='item-cell item-4'>
+      <view class='item-detail'>
+        <text class='txt'>已签约</text>
+        <view class="num">8669
+
+        </view>
+      </view>
+    </view>
+    <view class='item-cell item-5'>
+      <view class='item-detail'>
+        <text class='txt'>已失效</text>
+        <view class="num">1926
+
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+<view class='new-order-list'>
+  <view class='soma-hd'><text class='iconfont icon-gonggao'></text>新订单-请及时处理</view>
+  <view class='soma-list'>
+      <view class='item-cell'>
+          <view class='time'>
+              <view class='tag'><text class='txt-1'>时间</text>04-10 15:00</view>
+          </view>
+          <view class="person-info">余先生（18106968460）</view>
+          <view class='address'>首开领翔上郡 ></view>
+      </view>
+
+      <view class='item-cell'>
+          <view class='time'>
+              <view class='tag'><text class='txt-1'>时间</text>04-10 15:00</view>
+          </view>
+          <view class="person-info">余先生（18106968460）</view>
+          <view class='address'>首开领翔上郡 ></view>
+      </view>
+      <view class='item-cell'>
+          <view class='time'>
+              <view class='tag'><text class='txt-1'>时间</text>04-10 15:00</view>
+          </view>
+          <view class="person-info">余先生（18106968460）</view>
+          <view class='address'>首开领翔上郡 ></view>
+      </view>
+      <view class='item-cell'>
+          <view class='time'>
+              <view class='tag'><text class='txt-1'>时间</text>04-10 15:00</view>
+          </view>
+          <view class="person-info">余先生（18106968460）</view>
+          <view class='address'>首开领翔上郡 ></view>
+      </view>
+  </view>
+</view>
+
+
+<view class='contact-phone clearfix'>
+    <view class='iconfont icon-76 icon-txt'></view>
+    <text class='txt-1'>联系客服</text>
+    <view class='phone'>0592-6799988 ></view>
+</view>

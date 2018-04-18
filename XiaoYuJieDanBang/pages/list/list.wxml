@@ -1,0 +1,57 @@
+<scroll-view scroll-x="true" bindscroll="scroll" class="nav-scroll clearfix">
+  <view class='scroll-view-item active'>
+    <text class="txt">全部</text>
+  </view>
+  <view class='scroll-view-item'>
+    <text class="txt">新订单</text>
+  </view>
+  <view class='scroll-view-item'>
+    <text class="txt">已量房</text>
+  </view>
+  <view class='scroll-view-item'>
+    <text class="txt">已设计</text>
+  </view>
+  <view class='scroll-view-item'>
+    <text class="txt">已签约</text>
+  </view>
+  <view class='scroll-view-item'>
+    <text class="txt">已失效</text>
+  </view>
+</scroll-view>
+
+
+
+<view class='order-list'>
+  <view class='soma-hd'>
+    <view class="order-num">订单编号：12345678</view>
+    <view class='order-time'>2018-04-10 14:14</view>
+  </view>
+  <view class='soma-list'>
+    <view class='item-cell'>
+      <view class='time'>
+        <view class='tag'>
+          <text class='txt-1'>时间</text>04-10 15:00</view>
+      </view>
+      <view class="person-info">余先生（18106968460）</view>
+      <view class='address'>首开领翔上郡 ></view>
+    </view>
+  </view>
+</view>
+
+<view class='order-list'>
+  <view class='soma-hd'>
+    <view class="order-num">订单编号：12345678</view>
+    <view class='order-time'>2018-04-10 14:14</view>
+  </view>
+  <view class='soma-list'>
+    <view class='item-cell'>
+      <view class='time'>
+        <view class='tag'>
+          <text class='txt-1'>时间</text>04-10 15:00</view>
+      </view>
+      <view class="person-info">余先生（18106968460）</view>
+      <view class='address'>首开领翔上郡 ></view>
+    </view>
+  </view>
+  <view class='arrow'><view></view><text>新</text></view>
+</view>
