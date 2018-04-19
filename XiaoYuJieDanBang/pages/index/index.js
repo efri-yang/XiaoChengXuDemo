@@ -26,6 +26,11 @@ Page({
           })
         }
       })
+    }else{
+      this.setData({
+        xyUserInfo: app.globalData.sessionJdbUserInfo,
+      });
+      this._getPageData();
     }
 
 

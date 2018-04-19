@@ -1,20 +1,20 @@
-<scroll-view scroll-x="true" bindscroll="scroll" class="nav-scroll clearfix">
-  <view class='scroll-view-item active'>
+<scroll-view scroll-x="true" bindscroll="scroll" class="nav-scroll clearfix" scroll-into-view="{{toView}}">
+  <view class='scroll-view-item {{toView=="orderall" ? "active":""}}' id='orderall' bindtap='navTap' type="all">
     <text class="txt">全部</text>
   </view>
-  <view class='scroll-view-item'>
+  <view class='scroll-view-item {{toView=="orderxdd" ? "active":""}}' id='orderxdd' bindtap='navTap'type="xdd">
     <text class="txt">新订单</text>
   </view>
-  <view class='scroll-view-item'>
+  <view class='scroll-view-item {{toView=="orderylf" ? "active":""}}' id='orderylf' bindtap='navTap'>
     <text class="txt">已量房</text>
   </view>
-  <view class='scroll-view-item'>
+  <view class='scroll-view-item {{toView=="orderysj" ? "active":""}}' id='orderysj' bindtap='navTap'>
     <text class="txt">已设计</text>
   </view>
-  <view class='scroll-view-item'>
+  <view class='scroll-view-item {{toView=="orderyqy" ? "active":""}}' id='orderyqy' bindtap='navTap'>
     <text class="txt">已签约</text>
   </view>
-  <view class='scroll-view-item'>
+  <view class='scroll-view-item {{toView=="orderysx" ? "active":""}}' id='orderysx' bindtap='navTap'>
     <text class="txt">已失效</text>
   </view>
 </scroll-view>

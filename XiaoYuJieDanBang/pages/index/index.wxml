@@ -17,43 +17,47 @@
   </view>
   <view class='list-item clearfix'>
     <view class='item-cell item-1'>
-      <view class='item-detail'>
-        <view class="num">{{orderCount.xdd}}
-          <!-- 订单为零的时候不显示小圆圈 -->
-          <view class='circle' wx:if="{{orderCount.xdd==0 ? false :true}}"></view>
+      <navigator url="/pages/list/list?type=orderxdd&toView=orderxdd">
+        <view class='item-detail'>
+          <view class="num">{{orderCount.xdd}}
+            <!-- 订单为零的时候不显示小圆圈 -->
+            <view class='circle' wx:if="{{orderCount.xdd==0 ? false :true}}"></view>
+          </view>
+          <text class='txt'>新订单</text>
         </view>
-        <text class='txt'>新订单</text>
-      </view>
+      </navigator>
     </view>
     <view class='item-cell item-2'>
-      <view class='item-detail'>
-        <view class="num">{{orderCount.ylf}} </view>
-        <text class='txt'>已量房</text>
-      </view>
+      <navigator url="/pages/list/list?type=orderylf&toView=orderylf">
+        <view class='item-detail'>
+          <view class="num">{{orderCount.ylf}} </view>
+          <text class='txt'>已量房</text>
+        </view>
+      </navigator>
     </view>
     <view class='item-cell item-3'>
-      <view class='item-detail'>
-        <view class="num">{{orderCount.ysj}}
-
+      <navigator url="/pages/list/list?type=orderysj&toView=orderysj">
+        <view class='item-detail'>
+          <view class="num">{{orderCount.ysj}}</view>
+          <text class='txt'>已设计</text>
         </view>
-        <text class='txt'>已设计</text>
-      </view>
+      </navigator>
     </view>
     <view class='item-cell item-4'>
-      <view class='item-detail'>
-        <text class='txt'>已签约</text>
-        <view class="num">{{orderCount.yqy}}
-
+      <navigator url="/pages/list/list?type=orderyqy&toView=orderyqy">
+        <view class='item-detail'>
+          <text class='txt'>已签约</text>
+          <view class="num">{{orderCount.yqy}}</view>
         </view>
-      </view>
+      </navigator>
     </view>
     <view class='item-cell item-5'>
-      <view class='item-detail'>
-        <text class='txt'>已失效</text>
-        <view class="num">{{orderCount.ysx}}
-
+      <navigator url="/pages/list/list?type=orderysx&toView=orderysx">
+        <view class='item-detail'>
+          <text class='txt'>已失效</text>
+          <view class="num">{{orderCount.ysx}}</view>
         </view>
-      </view>
+      </navigator>
     </view>
 
   </view>
