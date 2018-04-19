@@ -1,5 +1,19 @@
+
+
+.validate-msg{
+    border:1px solid #f60;
+    color: #f60;
+    padding:15rpx 10rpx; 
+    background:#fff;  
+    font-size:24rpx;
+    position: absolute;
+    left: 50%;
+    top:30rpx;
+    transform: translate(-50%,0);
+   
+}
 .cost-container{
-  padding:85rpx 30rpx 0; 
+  padding:125rpx 30rpx 0; 
 }
 
 .cost-container .tip-1{

@@ -36,22 +36,26 @@ Page({
         },
         dataType: "json",
         success: function (res) {
-          // 成功返回{error:0,userInfo:{uid:10,avatar:"",nickname:"",}}
+          //设置提交按钮状态
           that.setData({
             submiting: false
-          })
+          });
+          //如果用户不存在或则错误
           if(res.data.error){
             that.setData({
               validateMsg: res.data.msg
             })
           }else{
-             //动态全局赋值
-            app.globalData.xyUserInfo=res.data.XyUserInfo;
+            //用户存在
+            
+            //动态全局赋值
+            app.globalData.sessionJdbId=res.data.XyUserInfo["id"];
+            app.globalData.sessionJdbUserInfo = res.data.XyUserInfo;
+            
             //本地存储id
-          
             wx.setStorage({
-              key: "sessionJdbUserInfo",
-              data: res.data.XyUserInfo
+              key: "sessionJdbId",
+              data: res.data.XyUserInfo["id"]
             });
 
             //跳转到相关页面

@@ -1,5 +1,5 @@
 <!--index.wxml-->
-{{test}}
+
 <view class='header-top'>
   <view class='avatar-box clearfix'>
     <view class='pic'>

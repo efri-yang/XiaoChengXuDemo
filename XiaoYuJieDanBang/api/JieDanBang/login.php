@@ -3,8 +3,16 @@
 
 	include("conn.php");
 
-	$username=$_POST["username"];
-	$password=md5($_POST["password"]);
+  if($_POST["id"]){
+      $id=$_POST["id"];
+      $sql="select id,username,nickname,avatar from test_user where id='$id'";
+  }else{
+      $username=$_POST["username"];
+	    $password=md5($_POST["password"]);
+      $sql="select id,username,nickname,avatar from test_user where username='$username' and password='$password'";
+  }
+
+	
 	
 
 
@@ -14,7 +22,7 @@
 	// $username="yyh1";
 	// $password="96e79218965eb72c92a549dd5a330112";
 	// $sql="select id,username,nickname,avatar from test_user where username='yyh1' and password='96e79218965eb72c92a549dd5a330112'";
-	$sql="select id,username,nickname,avatar from test_user where username='$username' and password='$password'";
+	
 	$result=mysql_query($sql,$conn);
 
 	$dataArr=mysql_fetch_assoc($result);
