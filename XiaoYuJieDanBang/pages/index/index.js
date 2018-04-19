@@ -48,6 +48,7 @@ Page({
       },
       dataType: "json",
       success: function (res) {
+        
         //如果用户不存在或则错误
         if (res.data.error) {
           wx.redirectTo({
@@ -75,16 +76,17 @@ Page({
   _getPageData: function () {
     var that=this;
     wx.request({
-      url: app.globalData.server + "/order1.php",
+      url: app.globalData.server + "order1.php",
       method: 'post',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
       dataType: "json",
       success: function (res) {
+        console.dir(res);
         that.setData({
           orderCount: res.data.orderCount,
-          orderNew: res.data.orderNew
+          orderNew: res.data.list
         })
       }
     })

@@ -2,6 +2,7 @@
 
 page {
   background-color: #f6f6f6;
+  padding-bottom:30rpx; 
 }
 
 .header-top {
@@ -9,7 +10,7 @@ page {
 }
 
 .avatar-box {
-  padding: 0 30rpx;
+  padding: 20rpx 30rpx 0;
 }
 
 .avatar-box .pic {
@@ -109,7 +110,11 @@ page {
   border-bottom: 1px solid #46d299;
 }
 
-.list-item .item-4, .list-item .item-5 {
+
+
+
+
+.list-item .item-4 navigator, .list-item .item-5 navigator{
   padding: 50rpx 0;
 }
 
@@ -172,7 +177,9 @@ page {
   color: #14c67d;
 }
 
-.new-order-list .item-cell {
+
+
+.new-order-list .item-cell navigator{
   position: relative;
   padding: 20rpx 27rpx;
   border-bottom: 1px solid #ebebeb;
@@ -206,7 +213,7 @@ page {
   position: absolute;
   right: 27rpx;
   top: 50%;
-  color: #666;
+
   transform: translate(0, -50%);
 }
 

@@ -2,12 +2,18 @@
 
 page {
   background-color: #f6f6f6;
+  padding-top: 95rpx;
 }
 
 
 .nav-scroll{
   height:95rpx;
   display:flex;
+  position:fixed;
+  left:0;
+  right:0; 
+  top:0;
+  z-index:100;
   background:#ffffff; 
   white-space:nowrap;  
 }

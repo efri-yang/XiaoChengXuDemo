@@ -9,6 +9,7 @@
     
   ],
   "window": {
+    "enablePullDownRefresh": true,
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "小鱼接单宝",
@@ -17,5 +18,6 @@
   "networkTimeout": {
     "request": 20000
   },
+  
   "debug": false
 }

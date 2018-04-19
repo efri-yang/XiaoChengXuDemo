@@ -58,6 +58,11 @@ Page({
               url: '/pages/cost/cost?uid=' + app.globalData.sessionJdbId + "&orderid=" + that.data.orderId
             });
           } else {
+            //发送uid orderid  step 给后端
+            wx.showLoading({
+              title: '加载中',
+              mask: true
+            });
             wx.request({
               url: app.globalData.server + "detail.php",
               data: { 'uid': app.globalData.sessionJdbId },
@@ -66,6 +71,8 @@ Page({
                 "Content-Type": "application/x-www-form-urlencoded"
               },
               success: function (res) {
+                //关闭加载层
+                wx.hideLoading();
                 that.setData({
                   step: that.data.step + 1
                 });
@@ -74,6 +81,7 @@ Page({
           }
         } else if (res.tapIndex == 1) {
           //点击的是停止服务
+
         }
       },
       fail: function (res) {
