@@ -1,0 +1,26 @@
+<!--pages/test/list.wxml-->
+<scroll-view style="height:1000rpx" scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" class="list-wrap">
+  
+  <view wx:for="{{dataList}}" wx:for-index="idx" wx:for-item="item" class='item-list'>
+        {{item}}
+  </view>
+  
+  <!-- <view class='item-list'>1</view>
+  <view class='item-list'>2</view>
+  <view class='item-list'>3</view>
+  <view class='item-list'>4</view>
+  <view class='item-list'>5</view>
+  <view class='item-list'>6</view>
+  <view class='item-list'>7</view>
+  <view class='item-list'>8</view>
+  <view class='item-list'>9</view>
+  <view class='item-list'>10</view> -->
+</scroll-view>
+
+ 
+<view class='refresh-bottom'>
+ <view>{{loadMoreData}}</view>
+</view> 
+
+
+

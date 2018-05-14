@@ -5,14 +5,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    allPages:"",
+    dataList:[],
+    loadMoreData:"加载数据...",
+    currentPage:1
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+      this._getData();
   },
 
   /**
@@ -62,5 +65,38 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  
+  lower:function(){
+    if (this.data.currentPage == this.data.allPages) {
+      this.setData({
+        loadMoreData: '已经到顶'
+      });
+      return;
+    }else{
+      this.setData({
+        currentPage: this.data.currentPage+1
+      })
+    }
+    
+    this._getData();
+  },
+  _getData:function(){
+    var that=this;
+   
+    wx.request({
+      url:"https://wnworld.com/api/JieDanBang/lower.php",
+      data: {
+        page: that.data.currentPage
+      },
+      success: function (res) {
+        console.dir(res);
+        that.setData({
+          allPages: res.data.total,
+          dataList:that.data.dataList.concat(res.data.list)
+        })
+      }
+    })
   }
 })

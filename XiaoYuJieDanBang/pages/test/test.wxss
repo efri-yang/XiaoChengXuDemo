@@ -1,0 +1,17 @@
+/* pages/test/list.wxss */
+.list-wrap{
+
+}
+
+.list-wrap .item-list{
+  text-align:center; 
+  height:200rpx;
+  line-height:200rpx;
+  border:1px solid #666;  
+}
+
+.refresh-bottom{
+  height:50rpx;
+  background:#666;
+  text-align:center;   
+}
