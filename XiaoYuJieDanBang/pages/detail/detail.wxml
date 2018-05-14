@@ -10,8 +10,8 @@
   <view class="txt-1">订单编号：{{orderInfo.num}}</view>
   <view class="txt-1">派单时间：{{orderInfo.time}}</view>
   <view class="txt-1">派单员：{{orderInfo.person}}</view>
-
-  <view class="order-steps step-{{step}}" wx:if="{{step > 1 ? true :false}}">
+<!--wx:if="{{step > 1 ? true :false}}"  -->
+  <view class="order-steps step-{{step}}">
     <view class='line-wrap'>
         <view class='line'></view>
         <view class='line-on'></view>

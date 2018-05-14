@@ -37,6 +37,7 @@ Page({
         dataType: "json",
         success: function (res) {
           //设置提交按钮状态
+          console.dir(res);
           that.setData({
             submiting: false
           });

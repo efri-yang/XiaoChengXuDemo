@@ -121,6 +121,26 @@
   color: #14c67d;
 }
 
+.order-steps.step-6 .step-list .item-cell-1 .txt,
+.order-steps.step-6 .step-list .item-cell-2 .txt,
+.order-steps.step-6 .step-list .item-cell-3 .txt,
+.order-steps.step-6 .step-list .item-cell-4 .txt,
+.order-steps.step-6 .step-list .item-cell-5 .txt,
+.order-steps.step-6 .step-list .item-cell-6 .txt{
+  color: #14c67d;
+}
+
+
+.order-steps.step-7 .step-list .item-cell-1 .txt,
+.order-steps.step-7 .step-list .item-cell-2 .txt,
+.order-steps.step-7 .step-list .item-cell-3 .txt,
+.order-steps.step-7 .step-list .item-cell-4 .txt,
+.order-steps.step-7 .step-list .item-cell-5 .txt,
+.order-steps.step-7 .step-list .item-cell-6 .txt,
+.order-steps.step-7 .step-list .item-cell-7 .txt{
+  color: #14c67d;
+}
+
 .order-steps.step-1 .item-cell-1 .circle .circle-1 {
   background-color: #14c67d;
 }
@@ -300,6 +320,13 @@
 .order-steps.step-5 .item-cell-5 .circle .circle-3 {
   background-color: #c9ecde;
 }
+
+
+
+
+
+
+
 
 .order-steps .step-list {
   margin-top: 15rpx;
