@@ -7,6 +7,7 @@ Page({
   data: {
     allPages:"",
     dataList:[],
+    scrollHeight:0,  
     loadMoreData:"加载数据...",
     currentPage:1
   },
@@ -15,36 +16,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;  
+    wx.getSystemInfo({
+      success: function (res) {
+        console.info(res.windowHeight);
+        that.setData({
+          scrollHeight: res.windowHeight
+        });
+      }
+    });  
       this._getData();
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
+ 
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -60,14 +44,7 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  },
-
-  
+ 
   lower:function(){
     if (this.data.currentPage == this.data.allPages) {
       this.setData({

@@ -1,5 +1,5 @@
 <!--pages/test/list.wxml-->
-<scroll-view style="height:1000rpx" scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" class="list-wrap">
+<scroll-view style="height:{{scrollHeight}}px" scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" class="list-wrap">
   
   <view wx:for="{{dataList}}" wx:for-index="idx" wx:for-item="item" class='item-list'>
         {{item}}
@@ -15,12 +15,13 @@
   <view class='item-list'>8</view>
   <view class='item-list'>9</view>
   <view class='item-list'>10</view> -->
+  <view class='refresh-bottom'>
+    <view>{{loadMoreData}}</view>
+  </view> 
 </scroll-view>
 
  
-<view class='refresh-bottom'>
- <view>{{loadMoreData}}</view>
-</view> 
+
 
 
 
