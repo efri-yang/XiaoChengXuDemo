@@ -1,0 +1,69 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/mine/mine",
+    "pages/cropper/cropper",
+    "pages/homepage/homepage",
+
+    "pages/bangdan/listdet/listdet",
+    "pages/bangdan/listdet/optlist",
+    "pages/bangdan/listdet/rule",
+    "pages/bangdan/bizdet/bizdet",
+    "pages/bangdan/bizdet/otherlist",
+    "pages/bangdan/bizdet/map",
+    "pages/bangdan/bizdet/article",
+    "pages/bangdan/bizdet/webview",
+
+    "pages/uc/cate/cate",
+    "pages/uc/recommend/add",
+    "pages/uc/recommend/list",
+    "pages/uc/recommend/map",
+    "pages/uc/creation/creation",
+    "pages/uc/invitation/invitation",
+    "pages/uc/invitation/invitee",
+    "pages/uc/collection/bd",
+    "pages/uc/collection/biz",
+    "pages/uc/invite/create",
+    "pages/uc/invite/edit",
+    "pages/uc/invite/addInvitee",
+    "pages/uc/invite/preview",
+    "pages/uc/create/create",
+    "pages/uc/create/edit",
+    "pages/uc/receive/creator",
+    "pages/uc/receive/transfer",
+    "pages/uc/receive/invitee",
+    "pages/uc/receive/preview",
+    "pages/uc/receive/success"
+  ],
+  "window": {
+    "backgroundColor": "#fff",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "小榜",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": false,
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "borderStyle": "white",
+    "backgroundColor": "#fff",
+    "color": "#666",
+    "selectedColor": "#c9a66d",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "榜单",
+        "iconPath": "img/tabbar-home.png",
+        "selectedIconPath": "img/tabbar-home-ac.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "img/tabbar-mine.png",
+        "selectedIconPath": "img/tabbar-mine-ac.png"
+      }
+    ]
+  },
+  "debug": false
+}

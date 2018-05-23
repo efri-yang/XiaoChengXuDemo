@@ -1,0 +1,74 @@
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-141414 fn-clear text-center"></view>
+<view class="fixed top-0 left-0 right-0 bg-141414 z-index-0" style='height:700rpx'></view>
+<view style='padding-top:{{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px;'>
+  <view wx:if="{{cms || list}}" class="relative bg-f8f8f8 z-index-1">
+    <block wx:if="{{cms}}">
+      <view class="bg-141414 pl20 pr20">
+        <view class="text-center">
+          <image style='width:186rpx;height:121rpx;' src="https://m3.xiaoyu.com/img/wechatapp/xhb/tip.png"></image>
+        </view>
+        <view class="relative pt10 pb25 font-24 index-theme-text color-e1c28f opacity-08">
+          <view class="inline-block box-center">
+            <view class="line-clamp-3">{{cms.summary}}</view>onReachBottom
+          </view>
+        </view>
+      </view>
+      <view class='fn-clear pl20 pr20 pb40 index-theme'>
+        <view class="bg-fff box-shadow ulib-r5">
+          <block wx:if="{{cms.type == 2}}">
+            <view class="relative img-380 block z-index-2">
+              <video id="indexvideo" class="img-380 ulib-rt5" src="{{cms.video}}" controls="{{false}}" loop="{{true}}" autoplay="{{true}}" objectFit="cover"></video>
+            </view>
+          </block>
+          <block wx:else>
+            <navigator class="block relative z-index-2 img-380 img-cover ulib-rt5" url="{{cms.url}}" style='background-image:url({{cms.img}})'></navigator>
+          </block>
+          <view class="inner20 pt35 relative z-index-1">
+            <view class="absolute top-0 right-0 mr20 pt10 pb10 pl20 pr20 bg-red font-24 color-fff ulib-rb5" style='line-height:24rpx;'>{{cms.label}}</view>
+            <view class="font-36">
+              <navigator url="{{cms.url}}">{{cms.title}}</navigator>
+            </view>
+            <view class="pt10 pb10 font-24 color-666 line-clamp-2">{{cms.content}}</view>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <view class="inner40 pb5 bg-fff">
+      <block wx:for="{{list}}" wx:for-item="item" wx:key="key">
+        <navigator class="block bg-fff box-shadow mb40" url="../bangdan/listdet/listdet?bdId={{item.id}}">
+          <view class="img-260 img-cover ulib-rt5 relative" style='background-image:url({{item.cover}})'>
+            <view class="absolute left-0 top-0 right-0 pt40 pl20 fn-clear">
+              <block wx:for="{{item.cates}}" wx:for-item="cate" wx:key="ckey">
+                <view class=" inline-block bg-fff mr10 pt5 pb5 pl10 pr10 font-20 ulib-r5">{{cate}}</view>
+              </block>
+            </view>
+          </view>
+          <view class='pt30 pb30 pl20 pr20 fn-clear relative'>
+            <view class='vertical-middle wp80 font-32'>
+              <view class='line-clamp-2'>{{item.title}}</view>
+            </view>
+            <view class="fn-fr text-center bds-e1c28f space-nowrap">
+              <view class="pt5 pb5 pl10 pr10 font-24 color-c9a66d">{{item.biz_count}}家</view>
+              <view class="pt5 pb5 pl10 pr10 bg-e1c28f font-16 color-fff">上榜好店</view>
+            </view>
+          </view>
+        </navigator>
+      </block>
+    </view>
+    <view class="bg-fff pb20 text-center font-24 color-999" hidden="{{!loading}}">
+      <text class="icon icon-load"></text>加载中...
+    </view>
+    <view class="bg-fff pb20 text-center font-24 color-999" hidden="{{nomore}}">没有更多内容</view>
+  </view>
+  <view wx:if="{{!cms && !list && firstLoad}}" class="noData h-100vh relative z-index-1">
+    <view class="earth overflowhidden">
+      <view class="earth-con ulib-r100 relative overflowhidden">
+        <view class="unopened-icon"></view>
+        <block wx:for="{{twinkling}}" wx:for-item="item" wx:key="{{key}}">
+          <view class="twinkling" style="top:{{item.top}}rpx;left:{{item.left}}rpx;width:{{item.width}}rpx;height:{{item.width}}rpx;animation-duration:{{item.duration}}s;"></view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

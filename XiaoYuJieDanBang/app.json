@@ -1,17 +1,13 @@
 {
   "pages": [
-    
-    "pages/test/test",
     "pages/index/index",
+    "pages/list/list",
     "pages/login/login",
-    
+    "pages/setting/setting",
     "pages/cost/cost",
-    "pages/detail/detail",
-    "pages/list/list"
-    
+    "pages/detail/detail"  
   ],
   "window": {
-    "enablePullDownRefresh": true,
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "小鱼接单宝",
@@ -20,6 +16,5 @@
   "networkTimeout": {
     "request": 20000
   },
-  
   "debug": false
 }

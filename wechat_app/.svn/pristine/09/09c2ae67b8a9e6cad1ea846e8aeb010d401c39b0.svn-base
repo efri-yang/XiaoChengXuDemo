@@ -1,0 +1,26 @@
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+  <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-fanhui" hover-class="none" open-type='navigateBack'></navigator>
+  <view class="inline-block wp33 text-nowrap font-42">推荐好店</view>
+</view>
+
+<view style='margin-bottom:{{systemInfo.statusBarHeight==44?20:0}}px;padding-top:{{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px;'>
+  <view class="bg-fff font-30">
+    <block wx:for="{{recBiz}}" wx:key="{{item.id}}">
+      <view id="{{item.id}}" class="fn-clear bts pt35 pb25 pl40 pr40">
+        <view class="fn-fl wp70 mt2 text-nowrap">{{item.name}}</view>
+        <view class="fn-fr">
+          <i class="icon ml15 mr15 icon-upward {{index == 0 ? 'opacity50' : ''}}" wx:if="{{recBiz.length > 1}}" data-index="{{index}}" bindtap="upwardSt"></i>
+          <i class="icon ml15 mr15 icon-downward {{index == recBiz.length - 1 ? 'opacity50' : ''}}" wx:if="{{recBiz.length > 1}}" data-index="{{index}}" bindtap="downwardSt"></i>
+          <i class="icon ml15 icon-delete" data-index="{{index}}" bindtap="deleteSt"></i>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="inner40 font-32 text-center">
+    <navigator class="inline-block wp80 bds-e1c28f mt20 pt20 pb20 color-c9a66d ulib-r100" url="../recommend/add">＋添加推荐</navigator>
+  </view>
+  <view class="fixed bg-fff left-0 bottom-0 right-0 pt20 pb20 pl40 pr40 font-32" style="border-bottom:#fff {{systemInfo.statusBarHeight==44?'20':'0'}}px solid;">
+    <view class="block submit-btn pt20 pb20 text-center color-fff" bindtap='finish'>完成</view>
+  </view>
+</view>
+

@@ -1,0 +1,21 @@
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+  <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-fanhui" hover-class="none" open-type='navigateBack'></navigator>
+  <view class="inline-block wp33 text-nowrap font-42">邀请红人</view>
+</view>
+
+<view style='margin-bottom:{{systemInfo.statusBarHeight==44?"20":"0"}}px;padding-top:{{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px;'>
+  <view class="bts pl40 pr40">
+    <block  wx:for="{{list}}" wx:for-item="item" wx:key="key">
+    <view class="fn-clear mystore-list pt30 pb30">
+      <view class="fn-fl wp70">
+        <view class="font-30">{{item.biz_name}}</view>
+        <view class="mt5 font-24 color-666">{{item.address}}</view>
+      </view>
+      <view class="fn-fr bds-e96662 mt10 pt15 pb15 pl25 pr25 font-24 color-red" bindtap="invitePing" data-id='{{item.id}}' data-name='{{item.biz_name}}'>邀请红人</view>
+    </view>
+    </block>
+  </view>
+  <view class="fixed bg-fff left-0 bottom-0 right-0 inner20 font-32" style="border-bottom:#fff {{systemInfo.statusBarHeight==44?'20':'0'}}px solid;">
+    <button class="block submit-btn text-center color-fff ulib-r5" bindtap="invitePing" data-id='0' data-name=''>为所有店铺统一邀请红人</button>
+  </view>
+</view>

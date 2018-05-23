@@ -1,0 +1,28 @@
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+  <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-fanhui" hover-class="none" open-type='navigateBack'></navigator>
+  <view class="inline-block wp33 text-nowrap font-42">其他分店</view>
+</view>
+
+<view style='padding-top:{{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px;'>
+  <view class="bts inner40 pt10">
+    <block wx:for="{{list}}" wx:key="" wx:for-item="item">
+      <navigator class="block bbs pt30 pb30 font-30 fn-clear" url="../bizdet/bizdet?bizId={{item.id}}">
+        <view class="fn-fl wp80">
+          <view class="text-nowrap font-30">{{item.name}}</view>
+          <view class="mt20 text-nowrap font-24 color-666">{{item.category}}
+            <text class="pl20 pr20">|</text>人均
+            <text class="color-red">{{item.consume}}</text>元</view>
+          <view class="mt10 text-nowrap font-24 color-666">{{item.area}}
+            <text class="pl20 pr20">|</text> {{item.distance}}</view>
+        </view>
+        <i class="icon fn-fr mt50 icon-go4"></i>
+      </navigator>
+    </block>
+  </view>
+
+  <view class="pt20 pb20 text-center font-24 color-999" hidden="{{!loading}}">
+    <text class="icon icon-load"></text>加载中...
+  </view>
+  <view class="pt20 pb20 text-center font-24 color-999" hidden="{{nomore}}">没有更多内容</view>
+
+</view>

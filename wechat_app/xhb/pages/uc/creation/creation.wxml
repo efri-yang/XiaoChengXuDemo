@@ -1,0 +1,40 @@
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+  <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-fanhui" hover-class="none" open-type='switchTab' url='/pages/mine/mine'></navigator>
+  <view class="inline-block wp33 text-nowrap font-42">我的榜单</view>
+</view>
+
+<view wx:if="{{list}}" style='padding-top:{{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px;'>
+  <view class="fn-clear bts pt10 pb40 pl10">
+    <block wx:for="{{list}}" wx:for-item="item" wx:key="key">
+      <view class="fn-fl mt30 ml20 pin-item bg-fff box-shadow overflowhidden ulib-r5">
+        <view class="relative">
+          <navigator url="../../bangdan/listdet/listdet?bdId={{item.id}} ">
+            <image class="item-img " src="{{item.cover}} "></image>
+          </navigator>
+        </view>
+        <view class="inner20 pt10 pb0 item-tt overflowhidden font-28">
+          <navigator class="line-clamp-2 font32 " url="../../bangdan/listdet/listdet?bdId={{item.id}} ">{{item.title}}</navigator>
+        </view>
+        <view class="pb40 text-center relative">
+          <block wx:if="{{item.type == 1 && item.cfrom == 1}}">
+            <navigator class="inline-block bds pt10 pb10 pl40 pr40 font-24 color-666 ulib-r100" url="../recommend/list?bdId={{item.id}}">
+              <i class="icon mr10 icon-edit"></i>编辑</navigator>
+          </block>
+          <block wx:else>
+            <navigator class="inline-block bds pt10 pb10 pl40 pr40 font-24 color-666 ulib-r100" url="../create/edit?bdId={{item.id}}">
+              <i class="icon mr10 icon-edit"></i>编辑</navigator>
+          </block>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="pt20 pb20 text-center font-24 color-999" hidden="{{!loading}}">
+    <text class="icon icon-load"></text>加载中...
+  </view>
+  <view class="pt20 pb20 text-center font-24 color-999" hidden="{{nomore}}">没有更多内容</view>
+</view>
+
+<view class="vertical-middle wp100 text-center" wx:else>
+  <view><i class="icon icon-logo-none"></i></view>
+  <view class="mt10 font-30 color-999">暂无榜单</view>
+</view>

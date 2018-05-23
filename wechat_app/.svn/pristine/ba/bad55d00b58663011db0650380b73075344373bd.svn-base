@@ -1,0 +1,76 @@
+<block wx:if="{{show}}">
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+  <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-shouye" hover-class="none" open-type='switchTab' url='/pages/index/index'></navigator>
+  <view class="inline-block wp33 text-nowrap font-42">推荐好店</view>
+</view>
+
+<view style='border-top:#fff {{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px solid;' class='minh-100vh'>
+  <swiper class="h-90vh" vertical="{{noTip}}" current="{{current}}" wx:if="{{noTip && userinfo.user_id > 0}}">
+    <swiper-item class="h-90vh relative">
+      <view class="pt30 pb30 pl100 pr100 text-center">
+        <view>
+          <image class="item-portrait120 ulib-r100" src="{{inviter.headimg}}"></image>
+        </view>
+        <view class="mt30 relative">
+          <i class="icon icon-quotes2-l absolute top-0 left-0"></i>
+          <i class="icon icon-quotes2-r"></i>
+          <view class='font-32 color-666'>Hi～</view>
+          <view class='mt10 font-32 color-red'>{{detail.invitee_name}}</view>
+          <view class='mt10 font-24 color-999'>（{{detail.invitee_identity}}）</view>
+          <view class='mt20 font-32'>
+            <text class='color-666'>我是小红榜</text>
+            <text class="ml10">{{inviter.nickname}}</text>
+          </view>
+          <view class='mt10 line-clamp-2 font-32 color-666'>{{detail.message}}</view>
+        </view>
+        <view class="mt30">
+          <image class='ulib-r100' style='width:300rpx;height:300rpx;' src="https://m3.xiaoyu.com/img/wechatapp/xhb/default_cover.png"></image>
+        </view>
+        <view class="mt30 font-72">
+          <view>因为你喜欢的</view>
+          <view>才上榜</view>
+        </view>
+      </view>
+      <i class="icon icon-guide"></i>
+    </swiper-item>
+    <swiper-item class="h-90vh">
+      <view>
+        <view class="mt40 pl40 pr40 text-center font-46">{{detail.title}}</view>
+        <view class="mt50 ml70 mr70 inner30 bds"><view class="font-24 color-666 opacity-08">{{detail.profile}}</view></view>
+        <view class="mt30 fn-clear">
+          <block wx:for="{{recBiz}}" wx:for-item="item" wx:key="key">
+            <navigator class="fn-fl block mt30 text-center store-item" url="../../bangdan/bizdet/bizdet?id={{item.id}}" hover-class="none">
+              <image class="item-portrait120 bds ulib-r100" src="{{item.icon ? item.icon : 'https://m3.xiaoyu.com/img/wechatapp/xhb/default_hd_icon.png'}}"></image>
+              <view class="line-clamp-2 font-28">{{item.name}}</view>
+            </navigator>
+          </block>
+          <view class="fn-fl relative block mt30 text-center store-item" bindtap='addRecommend'>
+            <view class='recom-tip pt5 pb5 pl20 pr20 font-22 color-fff ulib-r100 z-index-2' hidden='{{current}}'><view class="recom-tip-arrow"></view>点击推荐好店</view>
+            <view class="inline-block item-portrait120 relative bg-f8f8f8 bds ulib-r100">
+              <i class="icon icon-addstore"></i>
+            </view>
+            <view class="line-clamp-2 font-28">推荐好店</view>
+          </view>
+        </view>
+      </view>
+      <view class="mt50 pl100 pr100 pb40 text-center">
+        <view class="wp100 brown-btn pt20 pb20 font-32 color-fff ulib-r100" bindtap='submitForm'>立即推荐</view>
+      </view>
+    </swiper-item>
+  </swiper>
+
+  <view class="pop-cover" hidden='{{noTip}}'>
+    <view class="pop bg-fff text-center ulib-r10">
+      <view class="pt60 pb60 pl60 pr60">
+        <view>
+          <i class="icon icon-{{icon}}"></i>
+        </view>
+        <view class="pt5 font-32">{{msg}}</view>
+        <view class="mt30 pl60 pr60 text-center">
+          <navigator class="wp100 brown-btn pt20 pb20 font-30 color-fff ulib-r100" open-type="{{open_type}}" url="{{url}}">{{button}}</navigator>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+</block>

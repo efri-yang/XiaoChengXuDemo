@@ -1,0 +1,46 @@
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+  <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-fanhui" hover-class="none" open-type='switchTab' url='/pages/mine/mine'></navigator>
+  <view class="inline-block wp33 text-nowrap font-42">邀请好友推荐好店</view>
+</view>
+
+<view style='margin-bottom:{{systemInfo.statusBarHeight==44?20:0}}px;border-top:#fff {{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px solid;' class='minh-100vh bg-f8f8f8'>
+  <view wx:if="{{list}}">
+    <view class="bts inner40">
+      <block wx:for="{{list}}" wx:key="key" wx:for-item="item">
+        <view class="bg-fff mb40 relative overflowhidden">
+          <view class="invite-tip {{item.bd_type == 1 ? 'bg-e1c28f' : 'bg-afafaf'}} font-24">{{item.bd_type == 1 ? '合辑' : '个人'}}</view>
+          <view class="inner10 fn-clear">
+            <view class="small-img fn-fl img-cover" style='background-image:url({{item.cover}})'></view>
+            <view class="pl320 pt40 pr40">
+              <view class='font-28'>{{item.title}}</view>
+            </view>
+          </view>
+          <view class="mt10 bts pt30 pb30 font-24">
+            <block wx-if="{{item.type == 0}}">
+              <navigator class="inline-block wp25 ml40 pt10 pb10 text-center bds color-666 ulib-r100" url="../invite/edit?id={{item.bd_id}}">编辑</navigator>
+            </block>
+            <block wx-if="{{item.children > 0}}">
+              <navigator class="inline-block wp25 ml40 pt10 pb10 text-center bds-e1c28f color-c9a66d ulib-r100" url="../../bangdan/listdet/listdet?bdId={{item.bd_id}}">查看榜单</navigator>
+            </block>
+            <navigator class="inline-block wp25 ml40 pt10 pb10 text-center bg-e1c28f bds-e1c28f color-fff ulib-r100" url="../invitation/invitee?id={{item.id}}">邀请好友</navigator>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="pb60 text-center font-24 color-999" hidden="{{!loading}}">
+      <text class="icon icon-load"></text>加载中...
+    </view>
+    <view class="pb60 text-center font-24 color-999" hidden="{{nomore}}">没有更多内容</view>
+  </view>
+  <view class="vertical-middle wp100 text-center" wx:else>
+    <view>
+      <i class="icon icon-logo-none"></i>
+    </view>
+    <view class="mt10 font-30 color-999">暂无受邀的好友</view>
+  </view>
+  <view class="fixed bg-fff left-0 bottom-0 right-0 inner20 font-32" style="border-bottom:#fff {{systemInfo.statusBarHeight==44?20:0}}px solid;">
+    <block wx-if="{{userinfo.group == 1}}">
+      <navigator class="block pt20 pb20 submit-btn text-center color-fff ulib-r5" url="../invite/create">新建邀请</navigator>
+    </block>
+  </view>
+</view>

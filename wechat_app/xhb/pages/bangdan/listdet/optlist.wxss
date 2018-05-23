@@ -1,0 +1,3 @@
+page{padding-bottom:100rpx;background-color: #fff;}
+.db-checkbox{border:#e4e4e4 1px solid;}
+.db-checkbox.is_checked{border:#e1c28f 1px solid;}

@@ -1,0 +1,41 @@
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+  <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-fanhui" hover-class="none" open-type='navigateBack'></navigator>
+  <view class="inline-block wp33 text-nowrap font-42">受邀人信息</view>
+</view>
+
+<view style='padding-top:{{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px;'>
+<form bindsubmit="formSubmit">
+<view class="overflowhidden">
+  <view class="pl40 pr40 font-28">
+    <view class="pt80 pb80 font-46 text-center">{{detail.title}}</view>
+    <view class="bbs pt20 relative fn-clear" style='height:70rpx;'>
+      <view class="fn-fl con-160 mt5">受邀人姓名</view>
+      <view class="pl180">
+        <input name="name" class="wp90 font-28" maxlength="10" placeholder="填写受邀人姓名" bindinput='nameText' value='{{formData.name}}'/>
+      </view>
+      <view class="absolute top-0 right-0 pt30 pr30 font-26 color-999">{{formData.name === undefined ? 10 : 10 - formData.name.length}}</view>
+    </view>
+    <view class="bbs pt50 relative fn-clear" style='height:70rpx;'>
+      <view class="fn-fl con-160 mt5">受邀人身份</view>
+      <view class="pl180">
+        <input name="identity" class="wp90 font-28" maxlength="10" placeholder="如小鱼网CEO" bindinput='identityText' value='{{formData.identity}}'/>
+      </view>
+      <view class="absolute top-0 right-0 pt30 pr30 font-26 color-999">{{formData.identity === undefined ? 10 : 10 - formData.identity.length}}</view>
+    </view>
+    <view class="pt50 pb20 relative fn-clear">
+      <view class="fn-fl mt5 con-160">我想对TA说</view>
+      <view class="pl180">
+        <view class="relative">
+          <view class="diy-tip pt5 pb5 pl10 pr10 font-22 color-ccc ulib-r5" hidden="{{textareafocus}}"><span class="diy-tip-arrow"></span>Diy我的邀请标语！</view>
+          <textarea bindinput="contentText" bindfocus="focusStyle" class="wp90 pt0 font-28" maxlength="500" name="content" style='min-height:250rpx;margin-top:-9rpx;' auto-height value='{{ detail.message}}' />
+          <view class="pr30 font-26 color-999 text-right">{{contentLength}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="mt50 pl100 pr100">
+    <button class="wp100 brown-btn font-32 color-fff ulib-r100" formType="submit">完成</button>
+  </view>
+</view>
+</form>
+</view>

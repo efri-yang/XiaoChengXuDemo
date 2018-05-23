@@ -1,0 +1,43 @@
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+  <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-fanhui" hover-class="none" open-type='navigateBack'></navigator>
+  <view class="inline-block wp33 text-nowrap font-42">打榜</view>
+</view>
+
+<view style='margin-bottom:{{systemInfo.statusBarHeight==44?20:0}}px;padding-top:{{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px;'>
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="inner40 text-center">
+      <view class='font-36'>{{detail.title}}</view>
+      <view class='mt10 font-24 color-666'>从以下入围商家中勾选你会推荐的商家，为它打榜</view>
+    </view>
+    <view class="inner40 pt10">
+      <checkbox-group bindchange="checkboxChange" name="dabang">
+        <block wx:for="{{list}}" wx:for-item="item" wx:key="key">
+          <label class="block relative bg-fff inner10 box-shadow mt40 fn-clear db-checkbox {{item.checked?'is_checked':''}}  {{item.disabled ? 'is_disabled' : ''}}">
+            <view class="small-img fn-fl img-cover" style="background-image:url({{item.cover}})"></view>
+            <view class="pl320">
+              <view class='mt10 font-28 text-nowrap'>{{item.name}}</view>
+              <view class="mt10 font-24 {{item.disabled ? 'is_disabled' : 'color-red'}}">{{item.consume}}</view>
+              <view class="mt10 font-24 color-666" wx:if="{{item.area}}">
+                <text>{{item.area}}</text>
+                <text class="ml30">距离{{item.distance}}</text>
+              </view>
+              <view class="mt10 font-24" wx:else>
+                <text>{{item.address}}</text>
+              </view>
+            </view>
+            <checkbox value="{{item.id}}" hidden='true' checked="{{item.checked}}" disabled=''/>
+            <i class="icon icon-db-checkbox"></i>
+          </label>
+        </block>
+      </checkbox-group>
+    </view>
+    <view class="fixed bottom-0 left-0 right-0 pt10 pb10 pl40 pr40 bg-fff text-center font-32 fn-flex" style="border-bottom:#fff {{systemInfo.statusBarHeight==44?'20':'0'}}px solid;">
+    <view class="fn-flex-item pr30 relative">
+      <button formType="reset" class="bg-fff reset-btn font-32 color-c9a66d">取消</button>
+    </view>
+    <view class="fn-flex-item">
+      <button class="submit-btn font-32" formType="submit">打榜</button>
+    </view>
+  </view>
+  </form>
+</view>

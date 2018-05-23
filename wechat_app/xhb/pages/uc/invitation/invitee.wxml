@@ -1,0 +1,30 @@
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+  <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-fanhui" hover-class="none" open-type='navigateBack'></navigator>
+  <view class="inline-block wp33 text-nowrap font-42">邀请好友推荐好店</view>
+</view>
+
+<view style='margin-bottom:{{systemInfo.statusBarHeight==44?20:0}}px;padding-top:{{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px;'>
+  <view class="bts bg-fff pl40 pr40">
+    <block wx:for="{{list}}" wx:for-item="item" wx:key="key">
+      <view class="inviter-item bbs pt35 pb30 fn-clear">
+        <view class="fn-fl wp60">
+          <view class="font-30">{{item.invitee_name}}</view>
+          <view class="mt15 pb5 font-24 color-666">{{item.invitee_identity}}</view>
+        </view>
+        <view class="fn-fr" wx:if="{{item.invitee_uid != 0}}">
+          <image class="mt5 mr30 item-portrait80 ulib-r100" src="{{item.invitee_headimg}}"></image>
+        </view>
+        <view class="fn-fr" wx:else>
+          <navigator class="block mt10 ml40 pt10 pb10 pl40 pr40 text-center bds-e1c28f font-24 color-c9a66d ulib-r100" hover-class="none" url='../invite/preview?id={{item.id}}'>再次邀请</navigator>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="pb60 text-center font-24 color-999" hidden="{{!loading}}">
+    <text class="icon icon-load"></text>加载中...
+  </view>
+  <view class="pb60 text-center font-24 color-999" hidden="{{nomore}}">没有更多内容</view>
+  <view class="fixed bg-fff left-0 bottom-0 right-0 pt20 pb20 pl40 pr40 font-32" wx:if="{{detail.type == 1 || count < 1}}" style="border-bottom:#fff {{systemInfo.statusBarHeight==44?20:0}}px solid;">
+    <navigator class="block pt20 pb20 submit-btn text-center color-fff ulib-r5" url='../invite/addInvitee?id={{id}}'>邀请好友</navigator>
+  </view>
+</view>

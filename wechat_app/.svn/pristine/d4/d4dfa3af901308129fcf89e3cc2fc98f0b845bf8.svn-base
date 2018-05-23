@@ -1,0 +1,28 @@
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+  <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-fanhui" hover-class="none" open-type='navigateBack'></navigator>
+  <view class="inline-block wp33 text-nowrap font-42">筛选分类</view>
+</view>
+
+<view style='border-top:#fff {{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px solid;' class='minh-100vh bg-f8f8f8'>
+  <view class="font-28 color-666">
+    <view class="block bg-fff mt20 pt20 pb20 text-center font-30 ulib-r5 {{currentId =='all'?'color-red':''}}" data-id="0" data-name="全部榜单" bindtap="getCurrentId">全部榜单</view>
+    <block wx:for="{{cates}}" wx:for-item="item" wx:key="key">
+      <view class="mt20 relative cate-item bg-fff" wx:if="{{item.sub}}">
+        <view class="cate-item-tt text-center font-32">
+          <i class="icon icon-cate" style="background-image:url('{{item.icon}}');"></i>
+          <view>{{item.name}}</view>
+        </view>
+        <view class="cate-item-con overflowhidden bg-f8f8f8 fn-clear">
+          <block wx:for="{{item.sub}}" wx:for-item="sub" wx:key="key">
+            <view class="wp110 cate-item">
+              <view class="cate-item-pin bg-fff relative text-center font-30 {{currentId == sub.id ?'color-red':''}}" data-id="{{sub.id}}" data-name="{{sub.name}}" bindtap="getCurrentId">
+                <view wx:if="{{sub.hot != 0}}" class="cate-item-tip font-18">{{sub.hot == 1 ? "Hot" : "New"}}</view>
+                <view class="cate-item-pinname">{{sub.name}}</view>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

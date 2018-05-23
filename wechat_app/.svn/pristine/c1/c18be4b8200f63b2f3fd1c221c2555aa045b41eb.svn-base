@@ -1,0 +1,2 @@
+.recom-tip{position:absolute;top:-25rpx;left:50%;transform:translate(-50%,-50%);background-color:#333;white-space:nowrap;}
+.recom-tip-arrow{position:absolute;bottom:-14rpx;left:47%;border:10rpx dashed transparent;border-top:10rpx solid #333;font-size:0;line-height:0;z-index:2;}

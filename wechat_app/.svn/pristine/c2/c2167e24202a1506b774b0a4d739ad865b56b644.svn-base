@@ -1,0 +1,38 @@
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+  <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-fanhui" hover-class="none" open-type='navigateBack'></navigator>
+  <view class="inline-block wp33 text-nowrap font-42">添加好店</view>
+</view>
+
+<view style='border-top:#fff {{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px solid;' class='minh-100vh bg-f8f8f8'>
+  <view class="bg-fff bts">
+    <view class="inner40 pb10 font-30">
+      <view class="bg-f8f8f8 relative font-30 ulib-r100" style="height:72rpx;">
+        <view class="absolute top-0 left-0 right-0 bottom-0 pt15 text-center color-ccc" bindtap="scfocus" hidden='{{scshadow}}'>
+          <i class="icon mr10 icon-sc"></i>请输入搜索关键字</view>
+        <view class="pl80 pr40" hidden='{{!scshadow}}'>
+          <i class="icon absolute top-0 left-0 mt25 ml30 icon-sc"></i>
+          <input bindblur="scblur" bindinput="sctext" name="title" class="sc-inp pt10 text-left" confirm-type="text" focus="{{focus}}" value="{{name}}" />
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{list}}" class="font-30">
+      <block wx:for="{{list}}" wx:key="">
+        <view id="{{item.id}}" class="fn-clear bbs pt30 pb30 pl40 pr40" data-id="{{item.id}}" data-name="{{item.biz_name}}" data-icon="{{item.icon}}" bindtap="addRec">
+          <view class="fn-fl">{{item.biz_name}}</view>
+        </view>
+      </block>
+      <view class="pt20 pb20 text-center font-24 color-999" hidden="{{!loading}}">
+        <text class="icon icon-load"></text>加载中...
+      </view>
+      <view class="pt20 pb20 text-center font-24 color-999" hidden="{{nomore}}">没有更多内容</view>
+    </view>
+    <view class="inner40" wx:else>
+      <view class="text-center pt80 pb80 font-24 color-ccc">未搜索到合适的好店，可以自己添加</view>
+      <view class="bbs pb30 fn-clear">
+        <view class="fn-fl font-32 wp70 text-nowrap">{{name}}</view>
+      </view>
+      <navigator url="../recommend/map?keyword={{name}}" class="submit-btn mt80 pt20 pb20 text-center font-32 color-fff ulib-r5">立即添加
+      </navigator>
+    </view>
+  </view>
+</view>

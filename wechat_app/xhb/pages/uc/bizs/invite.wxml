@@ -1,0 +1,16 @@
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+  <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-fanhui" hover-class="none" open-type='navigateBack'></navigator>
+  <view class="inline-block wp33 text-nowrap font-42">邀请预览</view>
+</view>
+<view style='margin-bottom:{{systemInfo.statusBarHeight==44?20:0}}px;border-top:#fff {{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px solid;' class='minh-100vh bg-f8f8f8'>
+  <view class="img-box">
+    <image bindtap="previewImg" mode="aspectFit" src="{{imagePath}}" style='width:750rpx;height:1334rpx'></image>
+  </view>
+  <view class="fixed bg-fff left-0 bottom-0 right-0 inner20 font-32" style="border-bottom:#fff {{systemInfo.statusBarHeight==44?'20':'0'}}px solid;">
+    <button class="fn-fl bg-1a1a1a wp48 font-30 color-fff ulib-r0" bindtap='saveImageToPhotosAlbum'>保存到相册</button>
+    <button class="fn-fr wp48 submit-btn font-30" open-type="share">立即发送给朋友</button>
+  </view>
+
+  <canvas canvas-id='inviteCreate' style='width:375px;height:667px' hidden='{{canvasHidden}}'></canvas>
+
+</view>

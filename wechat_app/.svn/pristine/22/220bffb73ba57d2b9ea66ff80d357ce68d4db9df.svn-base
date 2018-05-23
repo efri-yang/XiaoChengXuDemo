@@ -1,0 +1,6 @@
+page{padding-bottom:125rpx;}
+
+.swpierpanel{width:750rpx;height:425rpx;}
+.swpierpanel .slide-image{width:750rpx;height:425rpx;}
+
+.store-logo{position:absolute;top:-65rpx;left:50%;width:120rpx;height:120rpx;margin-left:-65rpx;border:#fff 5rpx solid;}

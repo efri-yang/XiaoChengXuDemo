@@ -1,0 +1,29 @@
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+  <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-fanhui" hover-class="none" open-type='navigateBack'></navigator>
+  <view class="inline-block wp33 text-nowrap font-42">搜索商家</view>
+</view>
+
+<view style='padding-top:{{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px;'>
+  <view class="bg-f8f8f8 inner20 font-30" style="height:6vh">
+    <view class="bg-fff relative font-30 ulib-r100" style="height:72rpx;">
+      <view class="absolute top-0 left-0 right-0 bottom-0 pt15 text-center color-ccc" bindtap="scfocus" hidden='{{scshadow}}'><i class="icon mr10 icon-sc"></i>搜索商家</view>
+      <view class="pl80 pr40" hidden='{{!scshadow}}'><i class="icon absolute top-0 left-0 mt25 ml30 icon-sc"></i><input bindblur="scblur" bindconfirm="scsbm" name="title" value="{{keyword}}" class="sc-inp pt10 text-left" confirm-type="search" focus="{{focus}}" /></view>
+    </view>
+  </view>
+  <map id="map4select" longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}" style="width:{{map_width}}px;height:{{map_height}}px" bindregionchange="regionchange" bindmarkertap="markertap" controls="{{controls}}" scale="16">
+  </map>
+  <scroll-view class="bg-fff box-shadow2" scroll-y="true" style="height:51vh">
+    <view class="pt20 text-center font-22 color-999" hidden="{{!loading}}"><text class="icon mr10 icon-load"></text>加载中...</view>
+    <view hidden="{{loading}}">
+    <block wx:for="{{storelist}}" wx:key="{{item.id}}">
+        <view class="bbs pt20 pb20 pl40 pr40 relative" data-id="{{item.id}}" bindtap="choiceadd">
+          <view class="wp90">
+            <view class="font-30">{{item.title}}</view>
+            <view class="mt5 font-24 color-999">{{item.address}}</view>
+          </view>
+          <i class="icon icon-choiceadd {{item.check == true?'active':''}}"></i>
+        </view>
+    </block>
+    </view>
+  </scroll-view>
+</view>

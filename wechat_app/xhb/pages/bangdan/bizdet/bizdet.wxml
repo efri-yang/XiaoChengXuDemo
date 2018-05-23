@@ -1,0 +1,155 @@
+<block wx:if="{{show}}">
+  <view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+    <block wx:if="{{!homeIcon}}">
+      <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-fanhui" hover-class="none" open-type='navigateBack'></navigator>
+    </block>
+    <block wx:else>
+      <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-shouye" hover-class="none" open-type='switchTab' url='/pages/mine/mine'></navigator>
+    </block>
+    <view class="inline-block wp33 text-nowrap font-42">{{detail.name}}</view>
+  </view>
+
+  <view style='border-top:#fff {{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px solid;' class='minh-100vh bg-f8f8f8'>
+    <view class="bg-fff relative">
+      <swiper class="swpierpanel" autoplay="{{true}}" interval="{{5000}}" duration="{{1000}}" bindchange="swiperChange">
+        <block wx:for="{{detail.imgs.pics}}" wx:for-item="pin" wx:key>
+          <swiper-item>
+            <view>
+              <image src="{{pin}}" class="slide-image" />
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="absolute right-0 bottom-0 pb20 pr20 text-shadow font-24 color-fff" wx:if="{{detail.imgs.count > 1}}">{{currentitem}}/{{detail.imgs.count}}</view>
+    </view>
+    <view class="bg-fff relative pt80">
+      <image class="store-logo ulib-r100" src="{{detail.headimg}}"></image>
+      <view class="pt5 text-center text-bold font-36">{{detail.name}}</view>
+      <view class="mt5 text-center font-24 color-666">
+        <text class="pr10 color-red">{{detail.consume}}</text>|
+        <text class="pl10 pr10">{{detail.category}}</text>|
+        <text class="pl10 pr10">{{detail.area}}</text>|
+        <text class="pl10 pr10">{{detail.distance}}</text>
+      </view>
+      <view class="fn-clear inner40 font-24">
+        <view class="fn-fl wp70 color-666">
+          <navigator class="mt20" url="../bizdet/map?bizId={{detail.id}}">
+            <i class="icon mr10 icon-position"></i>{{detail.position.address}}</navigator>
+        </view>
+        <view class="fn-fr bds-e1c28f mt5 pt15 pb15 pl25 pr25 color-c9a66d ulib-r100" bindtap="phonecall">
+          <i class="icon mr10 icon-tel"></i>客服</view>
+      </view>
+    </view>
+    <view class="mt20 bg-fff" wx:if="{{detail.user_list}}">
+      <view class="pt40 pb40 pl20 pr20">
+        <view class="font-32 text-bold text-center">
+          <i class="icon mr10 icon-super"></i>Super推荐</view>
+        <view class="mt20">
+          <scroll-view class="space-nowrap" scroll-x="true">
+            <block wx:for="{{detail.user_list}}" wx:key="" wx:for-item="item">
+              <block wx:if="{{item.id == userinfo.user_id}}">
+                <navigator class="inline-block super-pin inner10 bds fn-clear ulib-r5" open-type='switchTab' url='/pages/mine/mine'>
+                  <view class="mt30 text-center">
+                    <image class="item-portrait88 ulib-r100" src="{{item.headimg}}"></image>
+                  </view>
+                  <view class="mt15 text-center font-28 text-bold">{{item.nickname}}</view>
+                  <view class="mt10 line-clamp-2 font-24 color-999">{{item.identity}}</view>
+                </navigator>
+              </block>
+              <block wx:else>
+                <navigator class="inline-block super-pin inner10 bds fn-clear ulib-r5" url="../../homepage/homepage?userId={{item.id}}">
+                  <view class="mt30 text-center">
+                    <image class="item-portrait88 ulib-r100" src="{{item.headimg}}"></image>
+                  </view>
+                  <view class="mt15 text-center font-28 text-bold">{{item.nickname}}</view>
+                  <view class="mt10 line-clamp-2 font-24 color-999">{{item.identity}}</view>
+                </navigator>
+              </block>
+            </block>
+          </scroll-view>
+        </view>
+      </view>
+    </view>
+
+    <view class="mt20 bg-fff" wx:if="{{detail.bd_list.length > 0}}">
+      <view class="inner40">
+        <view class="font-32 text-bold text-center">
+          <i class="icon mr10 icon-chosen"></i>入选榜单</view>
+        <view class="mt10">
+          <block wx:for="{{detail.bd_list}}" wx:key="" wx:for-item="item" wx:for-index="key">
+            <navigator class="block bbs pt25 pb25 font-30 fn-clear" url="../listdet/listdet?bdId={{item.id}}" hidden="{{bdAll ? '' : (key > 2 ? true : '')}}">
+              <view class="fn-fl wp80 text-nowrap color-666">
+                <i class="icon mr10 icon-bang"></i>{{item.title}}</view>
+              <i class="icon fn-fr mt8 icon-go4"></i>
+            </navigator>
+          </block>
+        </view>
+        <view class="text-center" wx:if="{{detail.bd_list.length > 3}}">
+          <view class="inline-block bds-e96662 mt40 pt15 pb15 pl60 pr60 font-24 color-red" bindtap='showBdList'>{{showBdText}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="mt20 bg-fff" wx:if="{{detail.article_count > 0}}">
+      <view class="inner40">
+        <view class="font-32 text-bold text-center">
+          <i class="icon mr10 icon-tweet"></i>探店推文</view>
+        <view class="mt10">
+          <block wx:for="{{detail.article_list}}" wx:key="" wx:for-item="item" wx:for-index="key">
+            <navigator class="block bbs pt25 pb25 font-30 fn-clear" url="{{item.url === undefined ? '../bizdet/article?id='+ item.id : '../bizdet/webview?id=' + item.id}}" hidden="{{articleAll ? '' : (key > 2 ? true : '')}}">
+              <view class="fn-fl wp80 text-nowrap color-666">{{item.title}}</view>
+              <i class="icon fn-fr mt8 icon-go4"></i>
+            </navigator>
+          </block>
+        </view>
+        <view class="text-center" wx:if="{{detail.article_count > 3}}">
+          <view class="inline-block bds-e96662 mt40 pt15 pb15 pl60 pr60 font-24 color-red" bindtap='showArticleList'>{{showArticleText}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="mt20 bg-fff text-center">
+      <view class="inner40">
+        <view class="font-32 text-bold">
+          <i class="icon mr10 icon-info"></i>附加信息</view>
+        <view class="mt20 font-30">
+          <block wx:for="{{detail.more_info.service}}" wx:for-item="item" wx:key>
+            <view class="inline-block mt10 ml20 mr20">
+              <i class="icon mr10 icon-dot"></i>
+              <text>{{item.name}}</text>
+            </view>
+          </block>
+        </view>
+        <view class="mt20 font-24 color-666">
+          <view>{{detail.more_info.open}}</view>
+        </view>
+        <navigator wx:if="{{detail.biz_shops > 0}}" class="inline-block bds-e96662 mt40 pt15 pb15 pl60 pr60 font-24 color-red" url="../bizdet/otherlist?bizId={{detail.id}}">查看全部{{detail.biz_shop}}家分店</navigator>
+      </view>
+    </view>
+
+  </view>
+
+  <view class="fixed bottom-0 left-0 right-0 bg-fff pt10 pb10 pl40 pr40 text-center" style="border-bottom:#fff {{systemInfo.statusBarHeight==44?20:0}}px solid;">
+    <view class="submit-btn pt15 pb15 opt-collection2 {{isCollection?'active':''}}" bindtap="{{userinfo.user_id !== undefined ? 'collectionOpt' : 'doLogin'}}">
+      <view class="icon mr10 icon-collection2"></view>
+      <text class="font-32">想去</text>
+      <text class="font-24" wx:if="{{detail.fav_num > 0}}"> {{favText}}</text>
+    </view>
+  </view>
+
+  <form bindsubmit="formSubmit">
+    <view class="pop-cover" hidden='{{popshow}}'>
+      <view class="pop bg-fff text-center ulib-r10">
+        <view class="pt40 pb40 pl60 pr60">
+          <view class="font-32">{{popName}}</view>
+          <input class="bds mt30 pt10 pb10 pl20 pr20 font-24 text-left ulib-r5" placeholder="请填写达人头衔（例如：舌尖上的中国CEO）" name="label" />
+          <input hidden='true' name="user_id" value='{{popUser}}' />
+        </view>
+        <view class="bts pt20 pb20 fn-flex font-32">
+          <button class="fn-flex-item btn-fff font-32 color-666" formType="reset">取消</button>
+          <button class="bls fn-flex-item btn-fff font-32 color-red ulib-r0" formType="submit">保存</button>
+        </view>
+      </view>
+    </view>
+  </form>
+</block>

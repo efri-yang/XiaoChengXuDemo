@@ -6,26 +6,31 @@ Page({
    * 页面的初始数据
    */
   data: {
-      submiting:false,
-      validateMsg:"",
-      uid:"",
-      orderid:""
+    submiting: false,
+    validateMsg: "",
+    sid: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
   onLoad: function (options) {
-      this.setData({
-        uid: options.uid,
-        orderid: options.orderid
-      });
-      this._initValidate();
-  },
-  formSubmit:function(e){
-    var that=this;
+
     this.setData({
-      submiting:true
+      step: parseInt(options.step) + 1,
+      sid: options.sid
+    });
+
+    this._initValidate();
+  },
+  formSubmit: function (e) {
+    var that = this;
+    this.setData({
+      submiting: true
     })
 
     if (!this.WxValidate.checkForm(e)) {
@@ -37,40 +42,77 @@ Page({
       return false
     } else {
       //验证通过进行后端请求
-      wx.request({
-        url: app.globalData.server + "price.php",
-        data:{"uid":that.data.uid,"orderid":that.data.orderid},
-        method: 'post',
-        header: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        dataType: "json",
-        success: function (res) {
-          //设置提交按钮状态
-          that.setData({
-            submiting: false
-          });
-          //如果提交不成功
-          if (res.data.error) {
-            that.setData({
-              validateMsg: res.data.msg
-            })
-          } else {
-            //如果提交成功
-            wx.showToast({
-              title: '提交成功',
-              icon: 'success',
-              duration: 2000,
-              success:function(){
-                wx.redirectTo({
-                  url: '/pages/detail/detail?id='+that.data.id
-                })
-              }
-            })
-          }
 
+      app.form.requestPost(app.form.API_CONFIG['upstep'], {
+        sid: that.data.sid,
+        step: that.data.step,
+        price: e.detail.value.totalprice,
+        bid: app.globalData.sessionJdbBrandId,
+        ukey: app.globalData.sessionJdbUkey
+      }, function (res) {
+        that.setData({
+          submiting: false
+        });
+        //如果提交不成功
+        if (res.status == "0") {
+          that.setData({
+            validateMsg: res.msg
+          })
+        } else {
+          //如果提交成功
+          wx.showToast({
+            title: '提交成功',
+            icon: 'success',
+            duration: 2000,
+            success: function () {
+              wx.redirectTo({
+                url: '/pages/detail/detail?sid=' + that.data.sid
+              })
+            }
+          })
         }
-      });
+      })
+
+      // wx.request({
+      //   url: app.globalData.server + "/welcome/wechatapp?callback=Jiaju.upstep",
+      //   data: {
+      //     sid: that.data.sid,
+      //     step: that.data.step,
+      //     price: e.detail.value.totalprice,
+      //     bid: app.globalData.sessionJdbBrandId,
+      //     ukey: app.globalData.sessionJdbUkey
+      //   },
+      //   method: 'post',
+      //   header: {
+      //     "Content-Type": "application/x-www-form-urlencoded"
+      //   },
+      //   dataType: "json",
+      //   success: function (res) {
+      //     //设置提交按钮状态
+      //     that.setData({
+      //       submiting: false
+      //     });
+      //     //如果提交不成功
+      //     if (res.data.status == "0") {
+      //       that.setData({
+      //         validateMsg: res.data.msg
+      //       })
+      //     } else {
+      //       //如果提交成功
+      //       wx.showToast({
+      //         title: '提交成功',
+      //         icon: 'success',
+      //         duration: 2000,
+      //         success: function () {
+      //           wx.redirectTo({
+      //             url: '/pages/detail/detail?sid=' + that.data.sid
+      //           })
+      //         }
+      //       })
+      //     }
+
+      //   }
+      // });
     }
   },
   //初始化验证插件
@@ -78,20 +120,20 @@ Page({
     const rules = {
       totalprice: {
         required: true,
-        number:true
+        number: true
       }
     }
 
     const messages = {
       totalprice: {
-        required:"请输入造价",
-        number:"造价价格必须是数字"
+        required: "请输入造价",
+        number: "造价价格必须是数字"
       },
-      
+
     }
 
     this.WxValidate = new WxValidate(rules, messages);
   }
 
-  
+
 })

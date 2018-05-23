@@ -1,0 +1,16 @@
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+  <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-fanhui" hover-class="none" open-type='navigateBack'></navigator>
+  <view class="inline-block wp33 text-nowrap font-42">推荐成功</view>
+</view>
+
+<view style='padding-top:{{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px;'>
+  <view class="pt200 pl100 pr100 text-center">
+    <view>
+      <i class="icon icon-success"></i>
+      <view class="mt10 font-36">推荐成功</view>
+    </view>
+    <view class="pt200">
+      <view><navigator class="wp100 brown-btn pt20 pb20 font-32 color-fff ulib-r100" url="../../bangdan/listdet/listdet?bdId={{bdId}}">查看榜单</navigator></view>
+    </view>
+  </view>
+</view>

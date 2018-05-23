@@ -1,100 +1,80 @@
-
+import form from '../../static/js/plugin/form'
 const app = getApp();
-
+app.form = new form(app);
 
 Page({
   data: {
     xyUserInfo: "",
-    orderCount: "",
-    orderNew: ""
+    dataList: "",
+    kf_tel: ""
   },
+
   onLoad: function () {
     var that = this;
-    //判断是否登录，如果没有登录，那么就要跳转
-    if (!app.globalData.sessionJdbId) {
-      //检车本地sessionId
-      wx.getStorage({
-        key: 'sessionJdbId',
-        success: function (res) {
-          //向后端请求(发送数据sessionJdbId)
-          that._getUserInfo(res.data);
-        },
-        fail: function () {
-          //没有本地sessionId证明都没有登陆过，直接跳转到登录页面
-          wx.redirectTo({
-            url: '/pages/login/login'
-          })
-        }
-      })
-    }else{
-      this.setData({
-        xyUserInfo: app.globalData.sessionJdbUserInfo,
-      });
-      this._getPageData();
-    }
+    setTimeout(function () {
+      that._getPageData();
+    }, 100)
 
-
-
-  },
-  //根据id 获取用户信息
-  _getUserInfo: function (uid) {
-    var that = this;
-    wx.request({
-      url: app.globalData.server + "login.php",
-      data: { "id": uid },
-      method: 'post',
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      dataType: "json",
-      success: function (res) {
-        
-        //如果用户不存在或则错误
-        if (res.data.error) {
-          wx.redirectTo({
-            url: '/pages/login/login'
-          })
-        } else {
-          app.globalData.sessionJdbId = res.data.XyUserInfo["id"];
-          app.globalData.sessionJdbUserInfo = res.data.XyUserInfo;
-          //设置用户的信息
-          that.setData({
-            xyUserInfo: res.data.XyUserInfo
-          });
-          //本地存储id
-          wx.setStorage({
-            key: "sessionJdbId",
-            data: res.data.XyUserInfo["id"]
-          });
-
-          that._getPageData();
-        }
-      }
+    //获取配置信息
+    app.form.requestPost(app.form.API_CONFIG['config'], {}, function (res) {
+      that.setData({ kf_tel: res.data.kf_tel });
     });
   },
+
+  onShow: function () {
+    this._getPageData();
+  },
+
   //获取页面数据（登录以后才执行此步骤）
   _getPageData: function () {
-    var that=this;
-    wx.request({
-      url: app.globalData.server + "order1.php",
-      method: 'post',
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      dataType: "json",
-      success: function (res) {
-        console.dir(res);
-        that.setData({
-          orderCount: res.data.orderCount,
-          orderNew: res.data.list
-        })
-      }
+    var that = this;
+    app.form.requestPost(app.form.API_CONFIG['index'], {
+      bid: app.globalData.sessionJdbBrandId,
+      ukey: app.globalData.sessionJdbUkey
+    }, function (res) {
+      //判断是否登陆
+      // app.isLogin(res.islogin);
+      that.setData({
+        dataList: res.data
+      });
     })
   },
+  setting: function () {
+    wx.redirectTo({
+      url: '/pages/setting/setting'
+    })
+  },
+
   //拨打电话
   makeCallPhone: function () {
+    var that = this;
     wx.makePhoneCall({
-      phoneNumber: '18559160494' //仅为示例，并非真实的电话号码
+      phoneNumber: that.data.kf_tel //仅为示例，并非真实的电话号码
     })
+  },
+
+  onShareAppMessage: function () {
+    return {
+      title: '小鱼接单宝',
+      path: '/pages/index/index',
+      imageUrl: "http://m3.xiaoyu.com/img/jiedanbao_share.png",
+      success: function (res) {
+        wx.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 2000
+        })
+      },
+      fail: function (res) {
+
+      }
+    }
+  },
+  handAuthority: function () {
+    wx.navigateTo({
+      url: '/pages/authority/authority?id=10'
+    })
+
+
   }
 })

@@ -1,0 +1,50 @@
+<block wx:if="{{show}}">
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+  <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-shouye" hover-class="none" open-type='switchTab' url='/pages/index/index'></navigator>
+  <view class="inline-block wp33 text-nowrap font-42">推荐好店</view>
+</view>
+
+<view style='padding-top:{{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px;'>
+  <view class="pt30 pb30 pl100 pr100 text-center">
+    <view>
+      <image class="item-portrait120 ulib-r100" src="{{inviter.headimg}}"></image>
+    </view>
+    <view class="mt30 relative">
+      <i class="icon icon-quotes2-l absolute top-0 left-0"></i>
+      <i class="icon icon-quotes2-r"></i>
+      <view class='font-32 color-666'>Hi～</view>
+      <view class='mt10 font-32 color-red'>{{detail.invitee_name}}</view>
+      <view class='mt10 font-24 color-999'>（{{detail.invitee_identity}}）</view>
+      <view class='mt20 font-32'>
+        <text class='color-666'>我是小红榜</text>
+        <text class="ml10">{{inviter.nickname}}</text>
+      </view>
+      <view class='mt10 line-clamp-2 font-32 color-666'>{{detail.message}}</view>
+    </view>
+    <view class="mt30">
+      <image style='width:300rpx;height:300rpx;' class="ulib-r100" src="https://m3.xiaoyu.com/img/wechatapp/xhb/default_cover.png"></image>
+    </view>
+    <view class="mt30 font-72">
+      <view>因为你喜欢的</view>
+      <view>才上榜</view>
+    </view>
+    <view class="mt50">
+      <navigator class="wp100 brown-btn pt20 pb20 font-32 color-fff ulib-r100" url="../receive/invitee?id={{id}}">下一步 邀请好友打榜吧</navigator>
+    </view>
+  </view>
+</view>
+
+<view class="pop-cover" hidden='{{noTip}}'>
+  <view class="pop bg-fff text-center ulib-r10">
+    <view class="pt60 pb60 pl60 pr60">
+      <view>
+        <i class="icon icon-{{icon}}"></i>
+      </view>
+      <view class="font-32">{{msg}}</view>
+      <view class="mt30 pl60 pr60 text-center">
+        <navigator class="wp100 brown-btn pt20 pb20 font-30 color-fff ulib-r100" open-type="{{open_type}}" url="{{url}}">{{button}}</navigator>
+      </view>
+    </view>
+  </view>
+</view>
+</block>

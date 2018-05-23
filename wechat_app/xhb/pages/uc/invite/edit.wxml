@@ -1,0 +1,74 @@
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+  <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-fanhui" hover-class="none" open-type='navigateBack'></navigator>
+  <view class="inline-block wp33 text-nowrap font-42">编辑邀请</view>
+</view>
+
+<view style='padding-top:{{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px;'>
+<form bindsubmit="formSubmit">
+  <view class="pl40 pr40 bts overflowhidden">
+    <view class="bg-fff font-28">
+      <view class="bbs pt50 pr40 relative fn-clear" style='height:70rpx;'>
+        <view class="fn-fl con-160 mt5">榜单名称</view>
+        <view class="pl180">
+          <input bindinput="titleText" name="title" class="wp90 font-28" maxlength="30" placeholder="请输入榜单名称" placeholder-class="color-ccc" value='{{formData.title}}' />
+        </view>
+        <view class="absolute top-0 right-0 pt55 font-26 color-ccc">{{formData.title === undefined ? 30 : 30 - formData.title.length}}</view>
+      </view>
+      <view class="bbs pt50 relative fn-clear" style='height:70rpx;'>
+        <view class="fn-fl con-160 mt5">标签</view>
+        <view class="pl180">
+          <navigator class="fn-clear block" hover-class="none" url="../cate/cate?type=invite">
+            <view wx:if="{{cates.length == 0}}" class="fn-fl mt5 color-ccc">选择合适的标签，最多3个</view>
+            <view class="fn-fl wp80 text-nowrap" wx:if="{{cates.length > 0}}">
+              <block wx:for="{{cates}}" wx:for-item="item" wx:key="key">
+                <view class="inline-block mr10 pt5 pb5 pl10 pr10 bg-f8f8f8 ulib-r5">{{item.name}}</view>
+              </block>
+            </view>
+            <view class="fn-fr icon mt5 icon-goe"></view>
+          </navigator>
+        </view>
+      </view>
+      <view class="bbs pt50 pb30 relative fn-clear">
+        <view class="fn-fl con-160 mt5">封面</view>
+        <view class="pl180 fn-clear">
+          <navigator hover-class="none" url="../../cropper/cropper?type=invite">
+            <image class="fn-fl" style='width:201rpx;height:75rpx;' src="{{cover}}"></image>
+            <view class="fn-fl pl30 font-22 color-ccc"  style='margin-top:-5rpx;'>
+              <view>支持jpg／gif</view>
+              <view>或者png格式</view>
+              <view>大小不超过5M</view>
+            </view>
+          </navigator>
+        </view>
+      </view>
+      <view class="bbs pt50 relative fn-clear" style='height:70rpx;'>
+        <view class="fn-fl con-160 mt5">榜单类型</view>
+        <view class="pl180 pt5">
+          <radio-group name="type" bindchange="radioChange">
+            <label>
+              <radio value="1" hidden="true" checked="{{(formData.type == 1 || formData.type === undefined) ? true : false}}" disabled='true' />
+              <i class="icon mr10 icon-radio {{(formData.type == 1 || formData.type === undefined) ? 'active' : ''}}"></i>
+              <text class='color-ccc'>合辑</text>
+            </label>
+            <label class="ml70">
+              <radio value="2" hidden="true" checked='{{formData.type == 2 ? true : false}}' disabled='true' />
+              <i class="icon mr10 icon-radio {{formData.type == 2 ? 'active' : ''}}"></i>
+              <text class='color-ccc'>个人</text>
+            </label>
+          </radio-group>
+        </view>
+      </view>
+      <view class="pt50 pb20 relative fn-clear">
+        <view class="fn-fl con-160 mt5">榜单介绍</view>
+        <view class="pl180">
+          <textarea bindinput="contentText" class="wp90 pt0 font-28" maxlength="500" name="content" style='min-height:250rpx;margin-top:-9rpx;' auto-height placeholder="请输入榜单介绍、推荐理由" placeholder-class="color-ccc" value='{{formData.content}}' />
+          <view class="font-26 color-ccc text-right">{{formData.content === undefined ? 500 : 500 - formData.content.length}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="inner40">
+      <button class="submit-btn" formType="submit">立即保存</button>
+    </view>
+  </view>
+</form>
+</view>

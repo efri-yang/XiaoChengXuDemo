@@ -1,61 +1,52 @@
-
+import form from '../../static/js/plugin/form'
 const app = getApp();
+app.form = new form(app);
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    step: "",
-    orderId:"",
-    stepText: ['新订单', '已量房', '已设计', '已签约', '成功'],
-    customerInfo: "",
-    orderInfo: "",
-    decorateInfo: ""
+    step:"",
+    sid:"",
+    stepText: ['新订单', '已量房', '设计中', '已对比', '已签约', '施工中', '完成'],
+    dataList:"",
+    isIpx:app.globalData.isIpx,
+    fromWhere:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    app.isLogin();
     var that = this;
     //获取页面传递过来的id,然后动过id获取订单详情
     that.setData({
-      orderId:options.id
-    });
-    wx.request({
-      url: app.globalData.server + "detail.php",
-      data: options,
-      method: 'post',
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      success: function (res) {
-        that.setData({
-          step: res.data.step,
-          customerInfo: res.data.customerInfo,
-          orderInfo: res.data.orderInfo,
-          decorateInfo: res.data.decorateInfo
-        })
-      }
+      fromWhere: options.from,
+      sid:options.sid
     });
 
-
-
+    app.form.requestPost(app.form.API_CONFIG['detail'], {sid: options.sid}, function (res) {
+      that.setData({
+        step: parseInt(res.data.step),
+        dataList: res.data
+      })
+    });
   },
   setStepHandler: function () {
     var that = this;
-    if (this.data.step >= 5) {
+    if (this.data.step >= 6 || this.data.step==-1) {
       return;
     }
     wx.showActionSheet({
-      itemList: [this.data.stepText[this.data.step], '停止服务'],
+      itemList: [this.data.stepText[this.data.step+1], '停止服务'],
       success: function (res) {
         if (res.tapIndex == 0) {
           //点击的是步骤,发送数据请求(用户id 订单id)
           if (that.data.step == 3) {
             wx.redirectTo({
-              url: '/pages/cost/cost?uid=' + app.globalData.sessionJdbId + "&orderid=" + that.data.orderId
+              url: '/pages/cost/cost?sid='+that.data.sid+"&step="+that.data.step
             });
           } else {
             //发送uid orderid  step 给后端
@@ -63,16 +54,15 @@ Page({
               title: '加载中',
               mask: true
             });
-            wx.request({
-              url: app.globalData.server + "detail.php",
-              data: { 'uid': app.globalData.sessionJdbId },
-              method: 'post',
-              header: {
-                "Content-Type": "application/x-www-form-urlencoded"
-              },
-              success: function (res) {
-                //关闭加载层
-                wx.hideLoading();
+
+            app.form.requestPost(app.form.API_CONFIG['upstep'], { 
+              step: that.data.step + 1,
+              sid: that.data.sid,
+              bid: app.globalData.sessionJdbBrandId,
+              ukey: app.globalData.sessionJdbUkey
+            }, function (res) {
+              wx.hideLoading();
+              if (res.status == "1") {
                 that.setData({
                   step: that.data.step + 1
                 });
@@ -81,7 +71,19 @@ Page({
           }
         } else if (res.tapIndex == 1) {
           //点击的是停止服务
-
+          app.form.requestPost(app.form.API_CONFIG['upstep'], {
+            step: -1,
+            sid: that.data.sid,
+            bid: app.globalData.sessionJdbBrandId,
+            ukey: app.globalData.sessionJdbUkey
+          }, function (res) {   
+            wx.hideLoading();
+            if (res.status == "1") {
+              that.setData({
+                step: -1
+              })
+            }
+          });
         }
       },
       fail: function (res) {
@@ -93,7 +95,7 @@ Page({
   makeCallPhone: function () {
     var that = this;
     wx.makePhoneCall({
-      phoneNumber: that.data.customerInfo.phone //仅为示例，并非真实的电话号码
+      phoneNumber: that.data.dataList.signinfo.mobile //仅为示例，并非真实的电话号码
     })
   },
 
@@ -101,7 +103,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+   
   },
 
   /**

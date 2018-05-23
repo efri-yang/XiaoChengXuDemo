@@ -1,0 +1,35 @@
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+  <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-fanhui" hover-class="none" open-type='navigateBack'></navigator>
+  <view class="inline-block wp33 text-nowrap font-42">选择标签</view>
+</view>
+<view style='margin-bottom:{{systemInfo.statusBarHeight==44?20:0}}px;border-top:#fff {{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px solid;' class='minh-100vh bg-fafafa'>
+  <checkbox-group bindchange="checkboxChange" name="sort">
+    <block wx:for="{{cate}}" wx:for-item="item" wx:key="key">
+      <view class="mt20 relative cate-item bg-fff" wx:if="{{item.sub}}">
+        <view class="cate-item-tt text-center font-32">
+          <i class="icon icon-cate" style="background-image:url('{{item.icon}}');"></i>
+          <view>{{item.name}}</view>
+        </view>
+        <view class="cate-item-con overflowhidden bg-f8f8f8 fn-clear">
+          <view class="wp110 cate-item">
+            <block wx:for="{{item.sub}}" wx:key="" wx:for-item="sub">
+              <label class="cate-item-pin bg-fff relative text-center font-30 {{sub.checked ? 'color-red' : ''}} {{sub.disabled ? 'is_disabled' : ''}}">
+                <checkbox value="{{sub.id}}" disabled="{{sub.disabled}}" hidden='true' checked="{{sub.checked}}" />
+                <view wx:if="{{sub.hot != 0}}" class="cate-item-tip font-18">{{sub.hot == 1 ? "Hot" : "New"}}</view>
+                <view class="cate-item-pinname">{{sub.name}}</view>
+              </label>
+            </block>
+          </view>
+        </view>
+      </view>
+    </block>
+  </checkbox-group>
+  <view class="fn-flex fixed bottom-0 left-0 right-0 bg-fff inner20 text-center font-32" style="border-bottom:#fff {{systemInfo.statusBarHeight==44?'20':'0'}}px solid;">
+    <view class="fn-flex-item pr10">
+      <view bindtap="resetsort" class="block bg-1a1a1a pt20 pb20 color-fff ulib-r100">重置</view>
+    </view>
+    <view class="fn-flex-item pl10">
+      <view bindtap="submitsort" class="block submit-btn pt20 pb20 color-fff">确定</view>
+    </view>
+  </view>
+</view>

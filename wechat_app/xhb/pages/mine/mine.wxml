@@ -1,0 +1,87 @@
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+  <view class="inline-block wp33 text-nowrap font-42">我的</view>
+</view>
+
+<view style='border-top:#fff {{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px solid;' class='minh-100vh bg-f8f8f8'>
+  <view class="pt30 pb30 pl40 pr40 bg-fff" wx:if="{{userinfo.user_id > 0}}">
+    <view class="mine-theme-vip" wx:if="{{identity.identity}}">
+      <view class="pt40 pl40 pr40">
+        <view class="mt20 fn-clear">
+          <image class="fn-fl item-portrait88 ulib-r100" src="{{userinfo.headimg}}"></image>
+          <text class="fn-fl mt25 ml20 font-32 color-fff">{{userinfo.nickname}}</text>
+          <i class="icon mt30 ml10 icon-auth"></i>
+        </view>
+        <view class="mt25 font-22 color-fff fn-clear" bindtap="editAuth">
+          <view class="fn-fl opacity-08 text-nowrap" style='width:auto;max-width:90%;'>红榜认证：{{identity.identity}}</view>
+          <i class="fn-fl icon ml10 icon-editinfo"></i>
+        </view>
+      </view>
+    </view>
+    <view class="mine-theme-average ulib-r20" wx:else>
+      <view class="pt70 pl40 pr40">
+        <view class="mt20 fn-clear">
+          <image class="fn-fl item-portrait88 ulib-r100" src="{{userinfo.headimg}}"></image>
+          <text class="fn-fl mt25 ml20 font-32 color-fff">{{userinfo.nickname}}</text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{userinfo.group > 0}}" class="fn-clear pt30 pl25 pr25">
+      <view class="fn-fl fn-clear" hover-class="none" bindtap='goToUrl'>
+        <i class="icon fn-fl mt15 icon-minvite"></i>
+        <view class="fn-fl ml15">
+          <view class="font-32 mt20">马上邀请好友</view>
+          <!--view class="mt5 font-24 color-999">推荐好店得好礼</view-->
+        </view>
+      </view>
+      <navigator class="fn-fr fn-clear" hover-class="none" url="../uc/create/create">
+        <i class="icon fn-fl mt15 icon-mcreate"></i>
+        <view class="fn-fl ml15">
+          <view class="font-32 mt20">立即创建榜单</view>
+          <!--view class="mt5 font-24 color-999">生活有料才有趣</view-->
+        </view>
+      </navigator>
+    </view>
+  </view>
+
+  <view class="bg-fff mt20 font-32" wx:if="{{userinfo.user_id > 0}}">
+    <navigator class="fn-clear bbs inner30" url="../uc/creation/creation">
+      <text class="fn-fl">我的榜单</text>
+      <view class="fn-fr">
+        <i class="icon ml15 icon-go3"></i>
+      </view>
+    </navigator>
+    <navigator class="fn-clear bbs inner30" url="../uc/collection/bd">
+      <text class="fn-fl">我喜欢的榜单</text>
+      <view class="fn-fr">
+        <i class="icon ml15 icon-go3"></i>
+      </view>
+    </navigator>
+    <navigator class="fn-clear bbs inner30" url="../uc/collection/biz">
+      <text class="fn-fl">我想去的好店</text>
+      <view class="fn-fr">
+        <i class="icon ml15 icon-go3"></i>
+      </view>
+    </navigator>
+    <navigator class="fn-clear inner30" url="../uc/bizs/list" wx:if="{{biz_num > 0}}">
+      <text class="fn-fl">我的店铺</text>
+      <view class="fn-fr">
+        <i class="icon ml15 icon-go3"></i>
+      </view>
+    </navigator>
+  </view>
+</view>
+
+<view class="pop-cover" hidden='{{popHide}}'>
+  <view class="pop bg-fff text-center ulib-r10">
+    <form bindsubmit="formSubmit" bindreset="formReset">
+      <view class="pt40 pb40 pl60 pr60">
+        <view class="font-32">认证信息</view>
+        <input name="identity" class="bds mt30 pt10 pb10 pl20 pr20 font-24 text-left ulib-r5" placeholder="请填认证信息" value='{{identity.identity}}' />
+      </view>
+      <view class="bts pt20 pb20 fn-flex">
+        <button class="fn-flex-item btn-fff font-32 color-666" formType="reset">取消</button>
+        <button class="bls fn-flex-item btn-fff font-32 color-red ulib-r0" formType="submit">保存</button>
+      </view>
+    </form>
+  </view>
+</view>

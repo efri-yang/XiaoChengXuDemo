@@ -1,0 +1,153 @@
+<block wx:if="{{show}}">
+  <view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-fff fn-clear text-center">
+    <block wx:if="{{!homeIcon}}">
+      <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-fanhui" hover-class="none" open-type='navigateBack'></navigator>
+    </block>
+    <block wx:else>
+      <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-shouye" hover-class="none" open-type='switchTab' url='/pages/index/index'></navigator>
+    </block>
+    <view class="inline-block wp33 text-nowrap font-42">榜单详情</view>
+  </view>
+
+  <view style='margin-bottom:{{systemInfo.statusBarHeight==44?20:0}}px;border-top:#fff {{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px solid;' class='minh-100vh bg-f8f8f8'>
+    <view class="pt40 pl60 pr60 pb40 bg-fff">
+      <view class="text-center font-36">
+        <view class="inline-block official-tip mr10 text-center bds-e96662 font-20 color-red ulib-r5 " wx:if="{{detail.type == 1 && detail.pid == 0}}">官榜</view>
+        {{detail.title}}
+      </view>
+      <view class="mt30 text-center font-22">
+        <block wx:if="{{detail.type == 1 && detail.pid == 0}}">
+          <view class="inline-block">
+            <image class="item-portrait ulib-r100" src="https://m3.xiaoyu.com/img/wechatapp/xhb/default_headimg.png"></image>
+            <text class="ml10 color-666">小红榜官方</text>
+          </view>
+        </block>
+        <block wx:else>
+          <block wx:if="{{detail.user_info.user_id == userinfo.user_id}}">
+            <navigator class="inline-block" url="../../mine/mine" open-type='switchTab'>
+              <image class="item-portrait ulib-r100" src="{{detail.user_info.headimg}}"></image>
+              <text class="ml10 color-666">{{detail.user_info.nickname}}</text>
+            </navigator>
+          </block>
+          <block wx:else>
+            <navigator class="inline-block" url="../../homepage/homepage?userId={{detail.user_info.user_id}}">
+              <image class="item-portrait ulib-r100" src="{{detail.user_info.headimg}}"></image>
+              <text class="ml10 color-666">{{detail.user_info.nickname}}</text>
+            </navigator>
+          </block>
+        </block>
+        <text class="ml10 color-666 font-18">创建</text>
+      </view>
+      <view class="mt20 relative font-24 color-666">
+        <i class="icon icon-quotes-l mr15"></i>
+        <text>{{detail.profile}}</text>
+        <text class='pl40'></text>
+        <i class="icon icon-quotes-r"></i>
+      </view>
+      <view class="text-center" wx:if="{{detail.type == 1 && detail.pid == 0}}">
+        <navigator class="inline-block bds-e1c28f mt40 pt15 pb15 pl60 pr60 font-24 color-c9a66d ulib-r100" hover-class="none" url="../listdet/rule?bdId={{detail.id}}">评选规则></navigator>
+      </view>
+    </view>
+    <view class="inner40 mt20 bg-fff">
+      <view class="fn-clear">
+        <view class="fn-fl font-32">共
+          <text class="pl5 pr10 color-red">{{detail.count}}</text>个商家</view>
+        <view class="fn-fr">
+          <view class="switch {{SwitchIsOn ? 'toggle-on' : 'toggle-off'}}" bindtap="tapSwitch"></view>
+        </view>
+      </view>
+      <view wx:if="{{viewtype==1}}">
+        <block wx:for="{{detail.list}}" wx:for-item="item" wx:key="key" wx:for-index="idx">
+          <navigator class="block bg-fff box-shadow mt40" url="../bizdet/{{item.hd ? 'bizdet' : 'map'}}?bizId={{item.id}}">
+            <view class="big-img img-cover ulib-rt5" style='background-image:url({{item.cover}})'></view>
+            <view class='pt30 pb30 pl20 pr20 relative' view wx:if="{{ifvote == 0}}">
+              <view class='fn-clear'>
+                <view class='fn-fl font-36 wp70 text-nowrap'>{{item.name}}</view>
+                <view class='fn-fr font-28'>
+                  <text class="color-red" wx:if="{{item.consume}}">{{item.consume}}</text>
+                </view>
+              </view>
+              <view class="mt10 font-24 color-999">
+                <block wx:if="{{item.hd}}">
+                  <text>{{item.area}}</text>
+                  <text class="ml20">距离{{item.distance}}</text>
+                </block>
+                <block wx:else>
+                  <i class="icon mr10 icon-position"></i>
+                  <text>{{item.address}}</text>
+                </block>
+              </view>
+            </view>
+            <view class='pt30 pb30 pl20 pr20 relative' wx:else>
+              <i class="icon {{idx < 3 ? 'num-redtip' : 'num-darktip'}} font-24 color-fff">{{idx+1}}</i>
+              <view class='fn-clear'>
+                <view class='fn-fl font-36 wp70 text-nowrap'>{{item.name}}</view>
+              </view>
+              <view class="mt10 fn-clear font-24 color-999">
+                <view class="fn-fl">
+                  <text class="color-red" wx:if="{{item.consume}}">{{item.consume}}</text>
+                  <text class="ml20"><text class="color-red">{{item.vote_num}}</text>人打榜</text>
+                </view>
+                <block wx:if="{{item.hd}}">
+                  <view class="fn-fr">
+                    <text>{{item.area}}</text>
+                    <text class="ml20">距离{{item.distance}}</text>
+                  </view>
+                </block>
+                <block wx:else>
+                  <i class="icon ml10 icon-position"></i>
+                  <text>{{item.address}}</text>
+                </block>
+              </view>
+            </view>
+
+          </navigator>
+        </block>
+      </view>
+      <view wx:if="{{viewtype==2}}">
+        <view>
+          <block wx:for="{{detail.list}}" wx:for-item="item" wx:key="key" wx:for-index="idx">
+            <navigator class="block bg-fff inner10 box-shadow mt40 fn-clear" url="../bizdet/{{item.hd ? 'bizdet' : 'map'}}?bizId={{item.id}}">
+              <i wx-if="{{ifvote == 1}}" class="icon {{idx < 3 ? 'num-redtip' : 'num-darktip'}} font-24 color-fff">{{idx+1}}</i>
+              <view class="small-img fn-fl img-cover" style='background-image:url({{item.cover}})'></view>
+              <view class="pl320">
+                <view class='mt10 font-28 text-nowrap'>{{item.name}}</view>
+                <view class="mt10 font-24 color-999">
+                  <text class="color-red" wx:if="{{item.consume}}">{{item.consume}}</text>
+                  <text class="ml20" wx-if="{{ifvote == 1}}"><text class="color-red">{{item.vote_num}}</text>人打榜</text>
+                </view>
+                <view class="mt10 font-24 color-999">
+                  <block wx:if="{{item.hd}}">
+                    <text>{{item.area}}</text>
+                    <text class="ml20">距离{{item.distance}}</text>
+                  </block>
+                  <block wx:else>
+                    <i class="icon mr10 icon-position"></i>
+                    <text>{{item.address}}</text>
+                  </block>
+                </view>
+              </view>
+            </navigator>
+          </block>
+        </view>
+      </view>
+    </view>
+
+    <view class="fixed bottom-0 left-0 right-0 bg-fff text-center font-32 fn-flex" style="border-bottom:#fff {{systemInfo.statusBarHeight==44?'20':'0'}}px solid;">
+      <view wx-if="{{ifvote == 1}}" class="fn-flex-item relative pt25 pb25 opt-dabang" bindtap='turnTo' data-voted='{{detail.is_ping ? 1 : 0}}'>
+        <view class="icon mr10 icon-dabang {{detail.is_ping ? 'active' : ''}}"></view>
+        <text wx:if="{{detail.is_ping}}" class='color-red'>已打榜</text>
+        <text wx:else>打榜</text>
+      </view>
+      <view class="fn-flex-item relative pt25 pb25 opt-collection {{isCollection?'active':''}}" bindtap="{{userinfo.user_id > 0 ? 'collectionOpt' : 'doLogin'}}">
+        <view class="icon mr10 icon-collection"></view>
+        <text>{{likeNum}}</text>
+      </view>
+      <view class="fn-flex-item pt25 pb25 relative">
+        <view class="icon mr10 icon-share"></view>
+        <text>分享</text>
+        <button open-type="share" class="list-share-btn"></button>
+      </view>
+    </view>
+  </view>
+</block>

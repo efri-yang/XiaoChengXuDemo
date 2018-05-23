@@ -1,0 +1,55 @@
+<view wx:if="{{systemInfo.version > 65}}" style='padding-top:{{systemInfo.statusBarHeight}}px;' class="navigationBar bg-141414 fn-clear text-center">
+  <navigator style='top:{{systemInfo.statusBarHeight}}px;' class="iconfont icon-fanhui color-fff" hover-class="none" open-type='navigateBack'></navigator>
+  <view class="inline-block wp33 text-nowrap font-42 color-fff">评选规则</view>
+</view>
+<view class="fixed top-0 left-0 right-0 bg-141414 z-index-0" style='height:700rpx'></view>
+
+<view style='padding-top:{{systemInfo.version > 65?systemInfo.statusBarHeight + 44:0}}px;'>
+  <view class="relative bg-f8f8f8 z-index-1">
+    <view>
+      <image style='width:750rpx;height:530rpx;' src="https://m3.xiaoyu.com/img/wechatapp/xhb/rule-tt.jpg"></image>
+    </view>
+    <view class="rule-panel relative pt30 pb40 pl50 pr50 box-shadow bg-fff ulib-r10">
+      <view class="text-center font-48">评选规则</view>
+      <view class="mt40">
+        <view class="font-28">评选规则</view>
+        <view class="mt10 font-24 color-999">{{rule}}</view>
+      </view>
+      <view class="mt30">
+        <view class="font-28">红人推荐</view>
+        <view class="mt30 font-24 color-999">
+          <import src="../../../wxParse/wxParse.wxml" />
+          <view class="wxParse">
+            <template is="wxParse" data="{{wxParseData:rule_1.nodes}}" />
+          </view>
+        </view>
+      </view>
+      <view class="text-center fn-clear">
+        <block wx:for="{{list}}" wx:for-item="item" wx:key="key">
+          <view class="fn-fl wp33 mt30">
+            <view>
+              <image class="item-portrait120 ulib-r100" src="{{item.headimg}}"></image>
+            </view>
+            <view class="text-nowrap font-28 color-c9a66d">{{item.nickname}}</view>
+            <view class="text-nowrap font-24 color-999">{{item.identity}}</view>
+          </view>
+        </block>
+      </view>
+      <view class="mt40">
+        <view class="font-28">官方测评</view>
+        <view class="mt30 font-24 color-999">
+          <import src="../../../wxParse/wxParse.wxml" />
+          <view class="wxParse">
+            <template is="wxParse" data="{{wxParseData:rule_2.nodes}}" />
+          </view>
+        </view>
+      </view>
+      <view class="mt40">
+        <view class="font-28">大众打榜</view>
+        <view class="mt10 font-24 color-999">{{rule_3}}</view>
+      </view>
+    </view>
+    <view class="pt60 pb60 text-center font-24 color-ccc">©2003-2018 小鱼网 版权所有，并保留所有权利。</view>
+  </view>
+
+</view>

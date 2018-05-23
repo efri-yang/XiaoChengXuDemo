@@ -1,0 +1,4 @@
+page{padding-bottom:100rpx;}
+
+.list-share-btn{position:absolute;top:0;left:0;bottom:0;right:0;opacity:0}
+.list-num{width:36rpx;height:36rpx;border:#ddd 1px solid;text-align:center;line-height:40rpx;}
