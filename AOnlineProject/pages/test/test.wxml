@@ -1,0 +1,8 @@
+<view class="section">
+  <view class="section__title">普通选择器</view>
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{areaArray}}" range-key="{{'name'}}"	 >
+    <view class="picker">
+        {{areaArray[index].id}}
+    </view>
+  </picker>
+</view>

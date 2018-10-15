@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/cropper/cropper",
     "pages/index/index",
     "pages/mine/mine",
-    "pages/cropper/cropper",
+    
     "pages/homepage/homepage",
 
     "pages/bangdan/listdet/listdet",

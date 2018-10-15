@@ -11,3 +11,5 @@
     <text class="user-motto">{{motto}}</text>
   </view>
 </view>
+
+<button open-type="getUserInfo">授权</button>

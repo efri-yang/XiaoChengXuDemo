@@ -1,11 +1,7 @@
 {
   "pages":[
-    "pages/qzb/index",
-    "pages/handWriting/handWriting",
-    "pages/test/test",
-    "pages/index/index",
-    "pages/logs/logs",
-    "pages/member/member"
+    "index/index",
+    "component/component"
   ],
   "window":{
     "backgroundTextStyle":"light",
