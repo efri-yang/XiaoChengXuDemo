@@ -1,0 +1,5 @@
+/* pages/pwd/pwd.wxss */
+.ipt-text{
+  border:1px solid #e5e5e5;
+  padding:10rpx; 
+}

@@ -1,0 +1,8 @@
+<!--pages/pwd/pwd.wxml-->
+
+
+<form bindsubmit="formSubmit" bindreset="formReset">
+    <input type="number" name="paypwd" class='ipt-text' maxlength="6"></input>
+    
+    <button form-type='submit' class='ipt-submit'>提交</button>
+</form>

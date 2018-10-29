@@ -1,9 +1,11 @@
 {
   "pages":[
+    "pages/pwd/pwd",
+    "pages/index/index",
     "pages/qzb/index",
     "pages/handWriting/handWriting",
     "pages/test/test",
-    "pages/index/index",
+    
     "pages/logs/logs",
     "pages/member/member"
   ],
